@@ -71,11 +71,7 @@ def get_queue():
         queue_items = loop.run_until_complete(approval_queue.get_queue(status))
         loop.close()
         
-        return jsonify({
-            "status": "success",
-            "count": len(queue_items),
-            "items": queue_items
-        }), 200
+        return jsonify(queue_items), 200
     except Exception as e:
         logger.error(f"Error getting queue: {str(e)}")
         return jsonify({"status": "error", "message": str(e)}), 500
@@ -90,10 +86,7 @@ def get_stats():
         stats = loop.run_until_complete(approval_queue.get_approval_stats())
         loop.close()
         
-        return jsonify({
-            "status": "success",
-            "stats": stats
-        }), 200
+        return jsonify(stats), 200
     except Exception as e:
         logger.error(f"Error getting stats: {str(e)}")
         return jsonify({"status": "error", "message": str(e)}), 500
