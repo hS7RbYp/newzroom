@@ -157,11 +157,8 @@ def get_article(article_id):
         loop.close()
         
         for item in queue_items:
-            if item.get("id") == article_id:
-                return jsonify({
-                    "status": "success",
-                    "article": item
-                }), 200
+            if item.get("id") == article_id or item.get("article_id") == article_id:
+                return Response(json.dumps(item), mimetype='application/json'), 200
         
         return jsonify({"status": "error", "message": "Article not found"}), 404
     except Exception as e:
