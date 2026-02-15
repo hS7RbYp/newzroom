@@ -47,9 +47,10 @@ class ArticleApprovalBot:
         config = get_config()
         self.approval_queue = get_approval_queue()
         
-        # Bot settings
-        self.app_id = config.get("TEAMS_APP_ID", "")
-        self.app_password = config.get("TEAMS_APP_PASSWORD", "")
+        # Bot settings (from environment or defaults)
+        import os
+        self.app_id = os.getenv("TEAMS_APP_ID", "")
+        self.app_password = os.getenv("TEAMS_APP_PASSWORD", "")
         
         # Adapter
         self.adapter = BotFrameworkAdapter(self.app_id, self.app_password)
