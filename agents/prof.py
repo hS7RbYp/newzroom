@@ -54,13 +54,45 @@ class ProfAgent(BaseAgent):
         content = input_data.get("content", "")
 
         try:
-            # TODO: Call Azure OpenAI GPT-4o for deep analysis
-            # fact_check = await self._call_openai(title, content)
-            fact_check_score = 8.2  # Placeholder
-            entities = ["Entity1", "Entity2"]
-            sentiment = "positive"
+            # Analyze content with GPT-4o for fact-checking and entity extraction
+            system_prompt = """You are an expert content analyst for a news organization.
+Analyze the article and provide:
+1. Fact-check score (1-10): How accurate/verifiable is this content?
+2. Key entities (people, organizations, places)
+3. Overall sentiment: positive, negative, or neutral
+4. Recommendation: APPROVE (>7.5), REVISE (6-7.5), or REJECT (<6)
 
-            recommendation = "APPROVE" if fact_check_score > 7.0 else "REVISE"
+Respond with ONLY a JSON object: {"fact_check_score": <1-10>, "entities": ["..."], "sentiment": "<positive|negative|neutral>", "recommendation": "<APPROVE|REVISE|REJECT>"}"""
+
+            user_message = f"""Title: {title}
+
+Content:
+{content[:2000]}
+
+Analyze this article for accuracy, key entities, and sentiment."""
+
+            response = await self._call_openai(
+                model_deployment="gpt-4o",
+                system_prompt=system_prompt,
+                user_message=user_message,
+                temperature=0.3,
+                max_tokens=300
+            )
+            
+            # Parse analysis from response
+            import json as json_lib
+            try:
+                result_json = json_lib.loads(response)
+                fact_check_score = float(result_json.get("fact_check_score", 7.0))
+                entities = result_json.get("entities", [])
+                sentiment = result_json.get("sentiment", "neutral")
+                recommendation = result_json.get("recommendation", "REVISE")
+            except:
+                # Fallback if JSON parsing fails
+                fact_check_score = 7.0
+                entities = []
+                sentiment = "neutral"
+                recommendation = "REVISE"
 
             return {
                 "agent": "prof",

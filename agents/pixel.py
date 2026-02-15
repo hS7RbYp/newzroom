@@ -50,13 +50,68 @@ class PixelAgent(BaseAgent):
         """
         article_id = input_data.get("article_id", "")
         title = input_data.get("title", "")
+        content = input_data.get("content", "")
         entities = input_data.get("entities", [])
 
         try:
-            # TODO: Call DALL-E 3 via Azure OpenAI
-            # image_url, generation_time = await self._call_dalle3(title, entities)
-            image_url = f"https://blob.example.com/images/{article_id}.png"
-            generation_time_ms = 12000  # Placeholder
+            # Generate image prompt from article content
+            system_prompt = """You are an expert at creating detailed image prompts for DALL-E 3.
+Based on the article, generate a professional image prompt.
+The prompt should be:
+- Descriptive and specific
+- Professional news/article style
+- 50-100 words
+- Include mood/style guidance
+
+Respond with ONLY the image prompt text (no JSON)."""
+
+            user_message = f"""Article Title: {title}
+
+Content Preview:
+{content[:500]}
+
+Key Entities: {', '.join(entities) if entities else 'General'}
+
+Generate a detailed image prompt for this article."""
+
+            image_prompt = await self._call_openai(
+                model_deployment="gpt-4o-mini",
+                system_prompt=system_prompt,
+                user_message=user_message,
+                temperature=0.8,
+                max_tokens=150
+            )
+            
+            # Call DALL-E 3 synchronously via asyncio.to_thread
+            import asyncio
+            import time
+            from openai import AzureOpenAI
+            from config import get_config
+            
+            start_time = time.time()
+            app_config = get_config()
+            client = AzureOpenAI(
+                api_key=app_config.openai.api_key,
+                api_version=app_config.openai.api_version,
+                azure_endpoint=app_config.openai.endpoint
+            )
+            
+            def generate_image():
+                return client.images.generate(
+                    model=app_config.openai.dalle_deployment,
+                    prompt=image_prompt,
+                    n=1,
+                    size="1024x1024",
+                    quality="standard"
+                )
+            
+            # Generate image (this is synchronous in the SDK)
+            image_response = await asyncio.to_thread(generate_image)
+            generation_time_ms = int((time.time() - start_time) * 1000)
+            
+            # Extract image URL from response
+            image_url = image_response.data[0].url if image_response.data else ""
+            self.logger.info(f"Generated image for article {article_id}: {image_url[:50]}...")
 
             return {
                 "agent": "pixel",

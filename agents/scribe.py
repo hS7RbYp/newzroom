@@ -55,11 +55,46 @@ class ScribeAgent(BaseAgent):
         content = input_data.get("content", "")
 
         try:
-            # TODO: Call Azure OpenAI GPT-4o for formatting & SEO
-            # formatted = await self._call_openai(title, content)
-            formatted_title = f"[FORMATTED] {title}"
-            seo_keywords = ["keyword1", "keyword2", "keyword3"]
-            seo_description = "SEO description here"
+            # Format content and generate SEO metadata
+            system_prompt = """You are an expert content formatter and SEO specialist.
+Format the article per brand guidelines and optimize for search:
+1. Rewrite headline for clarity and engagement
+2. Generate 5 SEO keywords
+3. Write a 160-char meta description
+4. Identify optimal publication angle
+
+Respond with ONLY a JSON object: {"formatted_title": "...", "seo_keywords": [...], "seo_description": "...", "publication_angle": "..."}"""
+
+            user_message = f"""Original Title: {title}
+
+Content:
+{content[:2000]}
+
+Entities: {input_data.get('entities', [])}
+Sentiment: {input_data.get('sentiment', 'neutral')}
+
+Format this article with optimized headline, keywords, and SEO metadata."""
+
+            response = await self._call_openai(
+                model_deployment="gpt-4o",
+                system_prompt=system_prompt,
+                user_message=user_message,
+                temperature=0.7,
+                max_tokens=400
+            )
+            
+            # Parse formatting response
+            import json as json_lib
+            try:
+                result_json = json_lib.loads(response)
+                formatted_title = result_json.get("formatted_title", title)
+                seo_keywords = result_json.get("seo_keywords", [])
+                seo_description = result_json.get("seo_description", "")
+            except:
+                # Fallback if JSON parsing fails
+                formatted_title = title
+                seo_keywords = []
+                seo_description = ""
 
             return {
                 "agent": "scribe",

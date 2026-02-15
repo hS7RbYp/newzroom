@@ -1,0 +1,1672 @@
+{"timestamp": "2026-02-14 19:16:02,162", "agent": "scout", "level": "INFO", "message": "Initialized agent"}
+2026-02-14 19:16:02,162 - scout - INFO - Initialized agent
+{"timestamp": "2026-02-14 19:16:02,321", "agent": "prof", "level": "INFO", "message": "Initialized agent"}
+2026-02-14 19:16:02,321 - prof - INFO - Initialized agent
+{"timestamp": "2026-02-14 19:16:02,480", "agent": "scribe", "level": "INFO", "message": "Initialized agent"}
+2026-02-14 19:16:02,480 - scribe - INFO - Initialized agent
+{"timestamp": "2026-02-14 19:16:02,640", "agent": "judge", "level": "INFO", "message": "Initialized agent"}
+2026-02-14 19:16:02,640 - judge - INFO - Initialized agent
+{"timestamp": "2026-02-14 19:16:02,799", "agent": "pixel", "level": "INFO", "message": "Initialized agent"}
+2026-02-14 19:16:02,799 - pixel - INFO - Initialized agent
+{"timestamp": "2026-02-14 19:16:02,961", "agent": "ops", "level": "INFO", "message": "Initialized agent"}
+2026-02-14 19:16:02,961 - ops - INFO - Initialized agent
+2026-02-14 19:16:02,961 - orchestrator - INFO - Orchestrator initialized with 6 agents
+2026-02-14 19:16:03,182 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos.documents.azure.com:443/'
+Request method: 'GET'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': '78a35a93-cfa9-4c12-b511-3933e6dc78a9'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:03 GMT'
+    'authorization': 'REDACTED'
+    'Accept': 'application/json'
+    'x-ms-client-id': 'f5475653-918b-4652-bea2-be877c64afc5'
+    'x-ms-thinclient-proxy-resource-type': 'databaseaccount'
+    'x-ms-thinclient-proxy-operation-type': 'Read'
+    'Content-Length': '0'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+No body was attached to the request
+2026-02-14 19:16:03,577 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Content-Location': 'https://aan-dev-cosmos.documents.azure.com/'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'x-ms-max-media-storage-usage-mb': '0'
+    'x-ms-media-storage-usage-mb': '0'
+    'x-ms-databaseaccount-consumed-mb': 'REDACTED'
+    'x-ms-databaseaccount-reserved-mb': 'REDACTED'
+    'x-ms-databaseaccount-provisioned-mb': 'REDACTED'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:03 GMT'
+2026-02-14 19:16:03,578 - embeddings - INFO - EmbeddingsManager initialized
+2026-02-14 19:16:03,579 - orchestrator - INFO - Starting article pipeline: d3a362e9-4491-4c90-aad2-2d520bd2e85c
+2026-02-14 19:16:03,579 - orchestrator - INFO - Article ID: 4ba4f282-6ee0-4f7b-a706-b7d9ff4cf1cf
+2026-02-14 19:16:03,579 - orchestrator - INFO - Stage 1: Scout (newsworthiness screening)
+2026-02-14 19:16:03,578 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/'
+Request method: 'GET'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': 'c9ee7709-08a7-433f-9443-c3e7951b2020'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:03 GMT'
+    'authorization': 'REDACTED'
+    'Accept': 'application/json'
+    'x-ms-client-id': 'f5475653-918b-4652-bea2-be877c64afc5'
+    'x-ms-thinclient-proxy-resource-type': 'databaseaccount'
+    'x-ms-thinclient-proxy-operation-type': 'Read'
+    'Content-Length': '0'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+No body was attached to the request
+2026-02-14 19:16:04,009 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Content-Location': 'https://aan-dev-cosmos-eastus.documents.azure.com/'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'x-ms-max-media-storage-usage-mb': '0'
+    'x-ms-media-storage-usage-mb': '0'
+    'x-ms-databaseaccount-consumed-mb': 'REDACTED'
+    'x-ms-databaseaccount-reserved-mb': 'REDACTED'
+    'x-ms-databaseaccount-provisioned-mb': 'REDACTED'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:03 GMT'
+2026-02-14 19:16:04,888 - httpx - INFO - HTTP Request: POST https://eastus.api.cognitive.microsoft.com/openai/deployments/gpt-4o-mini/chat/completions?api-version=2024-08-01-preview "HTTP/1.1 200 OK"
+{"timestamp": "2026-02-14 19:16:04,892", "agent": "scout", "level": "INFO", "message": "scout execution successful"}
+2026-02-14 19:16:04,892 - scout - INFO - scout execution successful
+2026-02-14 19:16:04,892 - orchestrator - INFO - scout completed in 1313ms
+2026-02-14 19:16:04,892 - orchestrator - INFO - Stage 2: Prof (fact-checking & entity extraction)
+2026-02-14 19:16:06,061 - httpx - INFO - HTTP Request: POST https://eastus.api.cognitive.microsoft.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-08-01-preview "HTTP/1.1 200 OK"
+{"timestamp": "2026-02-14 19:16:06,062", "agent": "prof", "level": "INFO", "message": "prof execution successful"}
+2026-02-14 19:16:06,062 - prof - INFO - prof execution successful
+2026-02-14 19:16:06,062 - orchestrator - INFO - prof completed in 1170ms
+2026-02-14 19:16:06,062 - orchestrator - INFO - Stage 3: Judge (quality assurance)
+2026-02-14 19:16:06,738 - httpx - INFO - HTTP Request: POST https://eastus.api.cognitive.microsoft.com/openai/deployments/gpt-4o-mini/chat/completions?api-version=2024-08-01-preview "HTTP/1.1 200 OK"
+{"timestamp": "2026-02-14 19:16:06,739", "agent": "judge", "level": "INFO", "message": "judge execution successful"}
+2026-02-14 19:16:06,739 - judge - INFO - judge execution successful
+2026-02-14 19:16:06,739 - orchestrator - INFO - judge completed in 676ms
+2026-02-14 19:16:06,739 - orchestrator - WARNING - Article flagged for brand compliance issues
+2026-02-14 19:16:06,739 - orchestrator - INFO - Stage 4: Scribe (content formatting & SEO)
+2026-02-14 19:16:08,280 - httpx - INFO - HTTP Request: POST https://eastus.api.cognitive.microsoft.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-08-01-preview "HTTP/1.1 200 OK"
+{"timestamp": "2026-02-14 19:16:08,281", "agent": "scribe", "level": "INFO", "message": "scribe execution successful"}
+2026-02-14 19:16:08,281 - scribe - INFO - scribe execution successful
+2026-02-14 19:16:08,281 - orchestrator - INFO - scribe completed in 1542ms
+2026-02-14 19:16:08,281 - orchestrator - INFO - Stage 5: Pixel (image generation)
+2026-02-14 19:16:09,492 - httpx - INFO - HTTP Request: POST https://eastus.api.cognitive.microsoft.com/openai/deployments/gpt-4o-mini/chat/completions?api-version=2024-08-01-preview "HTTP/1.1 200 OK"
+2026-02-14 19:16:20,074 - httpx - INFO - HTTP Request: POST https://eastus.api.cognitive.microsoft.com/openai/deployments/dall-e-3/images/generations?api-version=2024-08-01-preview "HTTP/1.1 200 OK"
+{"timestamp": "2026-02-14 19:16:20,076", "agent": "pixel", "level": "INFO", "message": "Generated image for article 4ba4f282-6ee0-4f7b-a706-b7d9ff4cf1cf: https://dalleproduse.blob.core.windows.net/private..."}
+2026-02-14 19:16:20,076 - pixel - INFO - Generated image for article 4ba4f282-6ee0-4f7b-a706-b7d9ff4cf1cf: https://dalleproduse.blob.core.windows.net/private...
+{"timestamp": "2026-02-14 19:16:20,076", "agent": "pixel", "level": "INFO", "message": "pixel execution successful"}
+2026-02-14 19:16:20,076 - pixel - INFO - pixel execution successful
+2026-02-14 19:16:20,076 - orchestrator - INFO - pixel completed in 11795ms
+2026-02-14 19:16:20,076 - orchestrator - INFO - Stage 6: Ops (publication & metrics)
+2026-02-14 19:16:20,077 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos.documents.azure.com:443/'
+Request method: 'GET'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': '80601c5a-90bd-48bc-98ca-0de8b410b098'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:20 GMT'
+    'authorization': 'REDACTED'
+    'Accept': 'application/json'
+    'x-ms-client-id': 'b13715db-8094-4a8e-977f-2bc0a57223bc'
+    'x-ms-thinclient-proxy-resource-type': 'databaseaccount'
+    'x-ms-thinclient-proxy-operation-type': 'Read'
+    'Content-Length': '0'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+No body was attached to the request
+2026-02-14 19:16:20,463 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Content-Location': 'https://aan-dev-cosmos.documents.azure.com/'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'x-ms-max-media-storage-usage-mb': '0'
+    'x-ms-media-storage-usage-mb': '0'
+    'x-ms-databaseaccount-consumed-mb': 'REDACTED'
+    'x-ms-databaseaccount-reserved-mb': 'REDACTED'
+    'x-ms-databaseaccount-provisioned-mb': 'REDACTED'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:20 GMT'
+2026-02-14 19:16:20,464 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/dbs/articles/colls/articles/'
+Request method: 'GET'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': '90681920-2b3b-42df-b835-f97d54e89ce4'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:20 GMT'
+    'authorization': 'REDACTED'
+    'Accept': 'application/json'
+    'x-ms-client-id': 'b13715db-8094-4a8e-977f-2bc0a57223bc'
+    'x-ms-thinclient-proxy-resource-type': 'colls'
+    'x-ms-thinclient-proxy-operation-type': 'Read'
+    'Content-Length': '0'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+No body was attached to the request
+2026-02-14 19:16:20,464 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/'
+Request method: 'GET'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': '7be9d019-0f8d-47ec-ad71-b75a0e9db9b6'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:20 GMT'
+    'authorization': 'REDACTED'
+    'Accept': 'application/json'
+    'x-ms-client-id': 'b13715db-8094-4a8e-977f-2bc0a57223bc'
+    'x-ms-thinclient-proxy-resource-type': 'databaseaccount'
+    'x-ms-thinclient-proxy-operation-type': 'Read'
+    'Content-Length': '0'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+No body was attached to the request
+2026-02-14 19:16:20,943 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Content-Location': 'https://aan-dev-cosmos-eastus.documents.azure.com/'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'x-ms-max-media-storage-usage-mb': '0'
+    'x-ms-media-storage-usage-mb': '0'
+    'x-ms-databaseaccount-consumed-mb': 'REDACTED'
+    'x-ms-databaseaccount-reserved-mb': 'REDACTED'
+    'x-ms-databaseaccount-provisioned-mb': 'REDACTED'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:20 GMT'
+2026-02-14 19:16:21,027 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Content-Location': 'https://aan-dev-cosmos-eastus.documents.azure.com/dbs/articles/colls/articles/'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-activity-id': '90681920-2b3b-42df-b835-f97d54e89ce4'
+    'x-ms-last-state-change-utc': 'Wed, 11 Feb 2026 15:20:33.236 GMT'
+    'etag': '"0000cd06-0000-0100-0000-699119ba0000"'
+    'x-ms-schemaversion': '1.21'
+    'collection-partition-index': 'REDACTED'
+    'collection-service-index': 'REDACTED'
+    'lsn': '3'
+    'x-ms-request-charge': '2'
+    'x-ms-alt-content-path': 'dbs/articles'
+    'x-ms-content-path': 'CukCAA=='
+    'x-ms-documentdb-partitionkeyrangeid': '0'
+    'x-ms-xp-role': '1'
+    'x-ms-global-Committed-lsn': '3'
+    'x-ms-number-of-read-regions': '0'
+    'x-ms-item-lsn': '1'
+    'x-ms-transport-request-id': '1'
+    'x-ms-cosmos-llsn': '3'
+    'x-ms-cosmos-item-llsn': '1'
+    'x-ms-session-token': '0:-1#3'
+    'x-ms-request-duration-ms': '0.652'
+    'x-ms-serviceversion': 'version=2.14.0.0'
+    'x-ms-cosmos-physical-partition-id': '0'
+    'x-ms-cosmos-max-content-length': 'REDACTED'
+    'x-ms-cosmos-internal-partition-id': 'REDACTED'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:20 GMT'
+2026-02-14 19:16:21,027 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/dbs/articles/colls/articles/docs/'
+Request method: 'POST'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': '9c02c58a-9ee8-4f5a-8e53-bf436c9944d5'
+    'x-ms-documentdb-partitionkey': '["4ba4f282-6ee0-4f7b-a706-b7d9ff4cf1cf"]'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:21 GMT'
+    'authorization': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Accept': 'application/json'
+    'x-ms-client-id': 'b13715db-8094-4a8e-977f-2bc0a57223bc'
+    'x-ms-cosmos-intended-collection-rid': 'CukCANq+Jx8='
+    'x-ms-thinclient-proxy-resource-type': 'docs'
+    'x-ms-thinclient-proxy-operation-type': 'Upsert'
+    'x-ms-documentdb-is-upsert': 'True'
+    'Content-Length': '1698'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-02-14 19:16:21,110 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 201
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-activity-id': '9c02c58a-9ee8-4f5a-8e53-bf436c9944d5'
+    'x-ms-last-state-change-utc': 'Wed, 11 Feb 2026 15:20:12.698 GMT'
+    'etag': '"87017196-0000-0100-0000-69912c750000"'
+    'x-ms-resource-quota': 'documentSize=51200;documentsSize=52428800;documentsCount=-1;collectionSize=52428800;'
+    'x-ms-resource-usage': 'documentSize=0;documentsSize=98;documentsCount=2;collectionSize=98;'
+    'x-ms-schemaversion': '1.21'
+    'lsn': '4'
+    'x-ms-request-charge': '9.71'
+    'x-ms-alt-content-path': 'dbs/articles/colls/articles'
+    'x-ms-content-path': 'CukCANq+Jx8='
+    'x-ms-quorum-acked-lsn': '3'
+    'x-ms-current-write-quorum': '3'
+    'x-ms-current-replica-set-size': '4'
+    'x-ms-documentdb-partitionkeyrangeid': '0'
+    'x-ms-xp-role': '1'
+    'x-ms-global-Committed-lsn': '3'
+    'x-ms-number-of-read-regions': '0'
+    'x-ms-transport-request-id': '1'
+    'x-ms-cosmos-llsn': '4'
+    'x-ms-cosmos-quorum-acked-llsn': '3'
+    'x-ms-session-token': '0:-1#4'
+    'x-ms-request-duration-ms': '4.917'
+    'x-ms-serviceversion': 'version=2.14.0.0'
+    'x-ms-cosmos-physical-partition-id': '0'
+    'x-ms-cosmos-internal-partition-id': 'REDACTED'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:20 GMT'
+{"timestamp": "2026-02-14 19:16:21,111", "agent": "ops", "level": "INFO", "message": "Published article 4ba4f282-6ee0-4f7b-a706-b7d9ff4cf1cf to Cosmos DB"}
+2026-02-14 19:16:21,111 - ops - INFO - Published article 4ba4f282-6ee0-4f7b-a706-b7d9ff4cf1cf to Cosmos DB
+{"timestamp": "2026-02-14 19:16:21,111", "agent": "ops", "level": "INFO", "message": "ops execution successful"}
+2026-02-14 19:16:21,111 - ops - INFO - ops execution successful
+2026-02-14 19:16:21,111 - orchestrator - INFO - ops completed in 1035ms
+2026-02-14 19:16:21,111 - orchestrator - INFO - Article successfully published: 4ba4f282-6ee0-4f7b-a706-b7d9ff4cf1cf
+2026-02-14 19:16:21,410 - httpx - INFO - HTTP Request: POST https://eastus.api.cognitive.microsoft.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2024-08-01-preview "HTTP/1.1 200 OK"
+2026-02-14 19:16:21,412 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/dbs/articles/colls/articles/'
+Request method: 'GET'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': 'd31b8dd1-d8cf-4b6b-92c7-a847cc589d0b'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:21 GMT'
+    'authorization': 'REDACTED'
+    'Accept': 'application/json'
+    'x-ms-client-id': 'f5475653-918b-4652-bea2-be877c64afc5'
+    'x-ms-thinclient-proxy-resource-type': 'colls'
+    'x-ms-thinclient-proxy-operation-type': 'Read'
+    'Content-Length': '0'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+No body was attached to the request
+2026-02-14 19:16:21,507 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Content-Location': 'https://aan-dev-cosmos-eastus.documents.azure.com/dbs/articles/colls/articles/'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-activity-id': 'd31b8dd1-d8cf-4b6b-92c7-a847cc589d0b'
+    'x-ms-last-state-change-utc': 'Wed, 11 Feb 2026 15:20:33.236 GMT'
+    'etag': '"0000cd06-0000-0100-0000-699119ba0000"'
+    'x-ms-schemaversion': '1.21'
+    'collection-partition-index': 'REDACTED'
+    'collection-service-index': 'REDACTED'
+    'lsn': '4'
+    'x-ms-request-charge': '2'
+    'x-ms-alt-content-path': 'dbs/articles'
+    'x-ms-content-path': 'CukCAA=='
+    'x-ms-documentdb-partitionkeyrangeid': '0'
+    'x-ms-xp-role': '1'
+    'x-ms-global-Committed-lsn': '4'
+    'x-ms-number-of-read-regions': '0'
+    'x-ms-item-lsn': '1'
+    'x-ms-transport-request-id': '1'
+    'x-ms-cosmos-llsn': '4'
+    'x-ms-cosmos-item-llsn': '1'
+    'x-ms-session-token': '0:-1#4'
+    'x-ms-request-duration-ms': '0.759'
+    'x-ms-serviceversion': 'version=2.14.0.0'
+    'x-ms-cosmos-physical-partition-id': '0'
+    'x-ms-cosmos-max-content-length': 'REDACTED'
+    'x-ms-cosmos-internal-partition-id': 'REDACTED'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:20 GMT'
+2026-02-14 19:16:21,508 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/dbs/articles/colls/articles/docs/'
+Request method: 'POST'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': '2e9e4080-9191-4edb-b105-a0b3a68cc6b2'
+    'x-ms-documentdb-partitionkey': '["4ba4f282-6ee0-4f7b-a706-b7d9ff4cf1cf"]'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:21 GMT'
+    'authorization': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Accept': 'application/json'
+    'x-ms-client-id': 'f5475653-918b-4652-bea2-be877c64afc5'
+    'x-ms-cosmos-intended-collection-rid': 'CukCANq+Jx8='
+    'x-ms-thinclient-proxy-resource-type': 'docs'
+    'x-ms-thinclient-proxy-operation-type': 'Upsert'
+    'x-ms-documentdb-is-upsert': 'True'
+    'Content-Length': '33934'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-02-14 19:16:21,781 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-activity-id': '2e9e4080-9191-4edb-b105-a0b3a68cc6b2'
+    'x-ms-last-state-change-utc': 'Wed, 11 Feb 2026 15:20:12.698 GMT'
+    'etag': '"87017396-0000-0100-0000-69912c750000"'
+    'x-ms-resource-quota': 'documentSize=51200;documentsSize=52428800;documentsCount=-1;collectionSize=52428800;'
+    'x-ms-resource-usage': 'documentSize=0;documentsSize=109;documentsCount=3;collectionSize=110;'
+    'x-ms-schemaversion': '1.21'
+    'lsn': '5'
+    'x-ms-request-charge': '293.08'
+    'x-ms-alt-content-path': 'dbs/articles/colls/articles'
+    'x-ms-content-path': 'CukCANq+Jx8='
+    'x-ms-quorum-acked-lsn': '4'
+    'x-ms-current-write-quorum': '3'
+    'x-ms-current-replica-set-size': '4'
+    'x-ms-documentdb-partitionkeyrangeid': '0'
+    'x-ms-xp-role': '1'
+    'x-ms-global-Committed-lsn': '4'
+    'x-ms-number-of-read-regions': '0'
+    'x-ms-transport-request-id': '1'
+    'x-ms-cosmos-llsn': '5'
+    'x-ms-cosmos-quorum-acked-llsn': '4'
+    'x-ms-session-token': '0:-1#5'
+    'x-ms-request-duration-ms': '25.027'
+    'x-ms-serviceversion': 'version=2.14.0.0'
+    'x-ms-cosmos-physical-partition-id': '0'
+    'x-ms-cosmos-internal-partition-id': 'REDACTED'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:20 GMT'
+2026-02-14 19:16:21,781 - embeddings - INFO - Stored embedding for article 4ba4f282-6ee0-4f7b-a706-b7d9ff4cf1cf
+2026-02-14 19:16:21,878 - httpx - INFO - HTTP Request: POST https://eastus.api.cognitive.microsoft.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2024-08-01-preview "HTTP/1.1 200 OK"
+2026-02-14 19:16:21,879 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/dbs/articles/colls/articles/docs/'
+Request method: 'POST'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'Content-Type': 'application/query+json'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': 'dfbeb8bb-1e7b-4963-9b11-53263ce5d47e'
+    'x-ms-documentdb-query-enablecrosspartition': 'True'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:21 GMT'
+    'authorization': 'REDACTED'
+    'Accept': 'application/json'
+    'x-ms-client-id': 'f5475653-918b-4652-bea2-be877c64afc5'
+    'x-ms-cosmos-correlated-activityid': 'ae4b7ce6-726d-4ec5-9356-a4d893b0d884'
+    'x-ms-cosmos-intended-collection-rid': 'CukCANq+Jx8='
+    'x-ms-thinclient-proxy-resource-type': 'docs'
+    'x-ms-thinclient-proxy-operation-type': 'SqlQuery'
+    'x-ms-documentdb-isquery': 'true'
+    'x-ms-session-token': '0:-1#5'
+    'Content-Length': '73'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-02-14 19:16:21,938 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 400
+Response headers:
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'x-ms-activity-id': 'dfbeb8bb-1e7b-4963-9b11-53263ce5d47e'
+    'x-ms-substatus': '1004'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:21 GMT'
+2026-02-14 19:16:21,938 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/dbs/articles/colls/articles/docs/'
+Request method: 'POST'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'Content-Type': 'application/json'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': '703c3158-02df-45d4-86dc-6fbabf548551'
+    'x-ms-cosmos-is-query-plan-request': 'True'
+    'x-ms-cosmos-supported-query-features': 'Aggregate,CompositeAggregate,Distinct,MultipleOrderBy,OffsetAndLimit,OrderBy,Top,NonStreamingOrderBy,HybridSearch,CountIf,WeightedRankFusion'
+    'x-ms-cosmos-query-version': '1.0'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:21 GMT'
+    'authorization': 'REDACTED'
+    'Accept': 'application/json'
+    'x-ms-client-id': 'f5475653-918b-4652-bea2-be877c64afc5'
+    'x-ms-thinclient-proxy-resource-type': 'docs'
+    'x-ms-thinclient-proxy-operation-type': 'SqlQuery'
+    'Content-Length': '73'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-02-14 19:16:21,996 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:21 GMT'
+2026-02-14 19:16:21,996 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/dbs/articles/colls/articles/pkranges/'
+Request method: 'GET'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': '0ce416c0-68f6-4568-9324-31d9b895ae3b'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:21 GMT'
+    'authorization': 'REDACTED'
+    'Accept': 'application/json'
+    'x-ms-client-id': 'f5475653-918b-4652-bea2-be877c64afc5'
+    'x-ms-cosmos-intended-collection-rid': 'CukCANq+Jx8='
+    'x-ms-thinclient-proxy-resource-type': 'pkranges'
+    'x-ms-thinclient-proxy-operation-type': 'ReadFeed'
+    'Content-Length': '0'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+No body was attached to the request
+2026-02-14 19:16:22,055 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Content-Location': 'https://aan-dev-cosmos-eastus.documents.azure.com/dbs/articles/colls/articles/pkranges/'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-activity-id': '0ce416c0-68f6-4568-9324-31d9b895ae3b'
+    'x-ms-last-state-change-utc': 'Fri, 13 Feb 2026 11:55:15.894 GMT'
+    'x-ms-schemaversion': '1.21'
+    'lsn': '11'
+    'x-ms-item-count': '1'
+    'x-ms-alt-content-path': 'dbs/articles/colls/articles'
+    'x-ms-content-path': 'CukCANq+Jx8='
+    'x-ms-xp-role': '1'
+    'x-ms-global-Committed-lsn': '11'
+    'x-ms-number-of-read-regions': '0'
+    'x-ms-transport-request-id': '638984'
+    'x-ms-cosmos-llsn': '11'
+    'x-ms-session-token': '0:-1#11'
+    'x-ms-request-duration-ms': '0.575'
+    'x-ms-serviceversion': 'version=2.14.0.0'
+    'x-ms-cosmos-internal-partition-id': 'REDACTED'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:21 GMT'
+2026-02-14 19:16:22,056 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/dbs/articles/colls/articles/docs/'
+Request method: 'POST'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'Content-Type': 'application/query+json'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': '1a3a4d23-6bd2-4a01-9161-dd4e005dcd2e'
+    'x-ms-documentdb-query-enablecrosspartition': 'True'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:22 GMT'
+    'authorization': 'REDACTED'
+    'Accept': 'application/json'
+    'x-ms-documentdb-partitionkeyrangeid': '0'
+    'x-ms-client-id': 'f5475653-918b-4652-bea2-be877c64afc5'
+    'x-ms-cosmos-correlated-activityid': 'ae4b7ce6-726d-4ec5-9356-a4d893b0d884'
+    'x-ms-cosmos-intended-collection-rid': 'CukCANq+Jx8='
+    'x-ms-thinclient-proxy-resource-type': 'docs'
+    'x-ms-thinclient-proxy-operation-type': 'SqlQuery'
+    'x-ms-documentdb-isquery': 'true'
+    'x-ms-session-token': '0:-1#5'
+    'Content-Length': '78'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-02-14 19:16:22,177 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-activity-id': '1a3a4d23-6bd2-4a01-9161-dd4e005dcd2e'
+    'x-ms-last-state-change-utc': 'Wed, 11 Feb 2026 15:20:26.023 GMT'
+    'x-ms-resource-quota': 'documentSize=51200;documentsSize=52428800;documentsCount=-1;collectionSize=52428800;'
+    'x-ms-resource-usage': 'documentSize=0;documentsSize=17;documentsCount=3;collectionSize=18;'
+    'x-ms-schemaversion': '1.21'
+    'lsn': '5'
+    'x-ms-item-count': '1'
+    'x-ms-request-charge': '3.5'
+    'x-ms-alt-content-path': 'dbs/articles/colls/articles'
+    'x-ms-content-path': 'CukCANq+Jx8='
+    'x-ms-documentdb-partitionkeyrangeid': '0'
+    'x-ms-xp-role': '2'
+    'x-ms-cosmos-query-execution-info': '{"reverseRidEnabled":false,"reverseIndexScan":false}'
+    'x-ms-global-Committed-lsn': '5'
+    'x-ms-number-of-read-regions': '0'
+    'x-ms-transport-request-id': '2'
+    'x-ms-cosmos-llsn': '5'
+    'x-ms-session-token': '0:-1#5'
+    'x-ms-request-duration-ms': '4.173'
+    'x-ms-serviceversion': 'version=2.14.0.0'
+    'x-ms-cosmos-is-partition-key-delete-pending': 'false'
+    'x-ms-cosmos-physical-partition-id': '0'
+    'x-ms-cosmos-internal-partition-id': 'REDACTED'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:21 GMT'
+2026-02-14 19:16:22,280 - httpx - INFO - HTTP Request: POST https://eastus.api.cognitive.microsoft.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2024-08-01-preview "HTTP/1.1 200 OK"
+2026-02-14 19:16:22,281 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/dbs/articles/colls/articles/docs/'
+Request method: 'POST'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'Content-Type': 'application/query+json'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': 'c7be9441-b23e-4b9b-bb9e-54e6b6b87c6c'
+    'x-ms-documentdb-query-enablecrosspartition': 'True'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:22 GMT'
+    'authorization': 'REDACTED'
+    'Accept': 'application/json'
+    'x-ms-client-id': 'f5475653-918b-4652-bea2-be877c64afc5'
+    'x-ms-cosmos-correlated-activityid': '77010b1f-a4df-4127-866b-a7f24591c64a'
+    'x-ms-cosmos-intended-collection-rid': 'CukCANq+Jx8='
+    'x-ms-thinclient-proxy-resource-type': 'docs'
+    'x-ms-thinclient-proxy-operation-type': 'SqlQuery'
+    'x-ms-documentdb-isquery': 'true'
+    'x-ms-session-token': '0:-1#5'
+    'Content-Length': '73'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-02-14 19:16:22,340 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 400
+Response headers:
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'x-ms-activity-id': 'c7be9441-b23e-4b9b-bb9e-54e6b6b87c6c'
+    'x-ms-substatus': '1004'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:21 GMT'
+2026-02-14 19:16:22,340 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/dbs/articles/colls/articles/docs/'
+Request method: 'POST'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'Content-Type': 'application/json'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': '1414f715-52c7-4a55-9e5d-84e0fc6b82cf'
+    'x-ms-cosmos-is-query-plan-request': 'True'
+    'x-ms-cosmos-supported-query-features': 'Aggregate,CompositeAggregate,Distinct,MultipleOrderBy,OffsetAndLimit,OrderBy,Top,NonStreamingOrderBy,HybridSearch,CountIf,WeightedRankFusion'
+    'x-ms-cosmos-query-version': '1.0'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:22 GMT'
+    'authorization': 'REDACTED'
+    'Accept': 'application/json'
+    'x-ms-client-id': 'f5475653-918b-4652-bea2-be877c64afc5'
+    'x-ms-thinclient-proxy-resource-type': 'docs'
+    'x-ms-thinclient-proxy-operation-type': 'SqlQuery'
+    'Content-Length': '73'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-02-14 19:16:22,398 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:21 GMT'
+2026-02-14 19:16:22,399 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/dbs/articles/colls/articles/docs/'
+Request method: 'POST'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'Content-Type': 'application/query+json'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': '259c49f4-ce67-4a94-840a-f6d2ea465f03'
+    'x-ms-documentdb-query-enablecrosspartition': 'True'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:22 GMT'
+    'authorization': 'REDACTED'
+    'Accept': 'application/json'
+    'x-ms-documentdb-partitionkeyrangeid': '0'
+    'x-ms-client-id': 'f5475653-918b-4652-bea2-be877c64afc5'
+    'x-ms-cosmos-correlated-activityid': '77010b1f-a4df-4127-866b-a7f24591c64a'
+    'x-ms-cosmos-intended-collection-rid': 'CukCANq+Jx8='
+    'x-ms-thinclient-proxy-resource-type': 'docs'
+    'x-ms-thinclient-proxy-operation-type': 'SqlQuery'
+    'x-ms-documentdb-isquery': 'true'
+    'x-ms-session-token': '0:-1#5'
+    'Content-Length': '78'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-02-14 19:16:22,518 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-activity-id': '259c49f4-ce67-4a94-840a-f6d2ea465f03'
+    'x-ms-last-state-change-utc': 'Wed, 11 Feb 2026 15:20:12.698 GMT'
+    'x-ms-resource-quota': 'documentSize=51200;documentsSize=52428800;documentsCount=-1;collectionSize=52428800;'
+    'x-ms-resource-usage': 'documentSize=0;documentsSize=109;documentsCount=3;collectionSize=110;'
+    'x-ms-schemaversion': '1.21'
+    'lsn': '5'
+    'x-ms-item-count': '1'
+    'x-ms-request-charge': '3.5'
+    'x-ms-alt-content-path': 'dbs/articles/colls/articles'
+    'x-ms-content-path': 'CukCANq+Jx8='
+    'x-ms-quorum-acked-lsn': '5'
+    'x-ms-current-write-quorum': '3'
+    'x-ms-current-replica-set-size': '4'
+    'x-ms-documentdb-partitionkeyrangeid': '0'
+    'x-ms-xp-role': '1'
+    'x-ms-cosmos-query-execution-info': '{"reverseRidEnabled":false,"reverseIndexScan":false}'
+    'x-ms-global-Committed-lsn': '5'
+    'x-ms-number-of-read-regions': '0'
+    'x-ms-transport-request-id': '2'
+    'x-ms-cosmos-llsn': '5'
+    'x-ms-cosmos-quorum-acked-llsn': '5'
+    'x-ms-session-token': '0:-1#5'
+    'x-ms-request-duration-ms': '3.691'
+    'x-ms-serviceversion': 'version=2.14.0.0'
+    'x-ms-cosmos-is-partition-key-delete-pending': 'false'
+    'x-ms-cosmos-physical-partition-id': '0'
+    'x-ms-cosmos-internal-partition-id': 'REDACTED'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:21 GMT'
+2026-02-14 19:16:22,613 - httpx - INFO - HTTP Request: POST https://eastus.api.cognitive.microsoft.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2024-08-01-preview "HTTP/1.1 200 OK"
+2026-02-14 19:16:22,614 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/dbs/articles/colls/articles/docs/'
+Request method: 'POST'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'Content-Type': 'application/query+json'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': '0564ae52-d38b-45a5-a5ad-f916fce96ef9'
+    'x-ms-documentdb-query-enablecrosspartition': 'True'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:22 GMT'
+    'authorization': 'REDACTED'
+    'Accept': 'application/json'
+    'x-ms-client-id': 'f5475653-918b-4652-bea2-be877c64afc5'
+    'x-ms-cosmos-correlated-activityid': '0b44236a-ca1f-4399-b4c6-19ab497e18de'
+    'x-ms-cosmos-intended-collection-rid': 'CukCANq+Jx8='
+    'x-ms-thinclient-proxy-resource-type': 'docs'
+    'x-ms-thinclient-proxy-operation-type': 'SqlQuery'
+    'x-ms-documentdb-isquery': 'true'
+    'x-ms-session-token': '0:-1#5'
+    'Content-Length': '73'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-02-14 19:16:22,673 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 400
+Response headers:
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'x-ms-activity-id': '0564ae52-d38b-45a5-a5ad-f916fce96ef9'
+    'x-ms-substatus': '1004'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:21 GMT'
+2026-02-14 19:16:22,673 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/dbs/articles/colls/articles/docs/'
+Request method: 'POST'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'Content-Type': 'application/json'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': '1b191e6a-1516-49e6-afc9-d3db8e5ee9ee'
+    'x-ms-cosmos-is-query-plan-request': 'True'
+    'x-ms-cosmos-supported-query-features': 'Aggregate,CompositeAggregate,Distinct,MultipleOrderBy,OffsetAndLimit,OrderBy,Top,NonStreamingOrderBy,HybridSearch,CountIf,WeightedRankFusion'
+    'x-ms-cosmos-query-version': '1.0'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:22 GMT'
+    'authorization': 'REDACTED'
+    'Accept': 'application/json'
+    'x-ms-client-id': 'f5475653-918b-4652-bea2-be877c64afc5'
+    'x-ms-thinclient-proxy-resource-type': 'docs'
+    'x-ms-thinclient-proxy-operation-type': 'SqlQuery'
+    'Content-Length': '73'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-02-14 19:16:22,731 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:21 GMT'
+2026-02-14 19:16:22,732 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/dbs/articles/colls/articles/docs/'
+Request method: 'POST'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'Content-Type': 'application/query+json'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': 'f2c438a0-1edb-4ea1-8386-c257a19ffdec'
+    'x-ms-documentdb-query-enablecrosspartition': 'True'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:22 GMT'
+    'authorization': 'REDACTED'
+    'Accept': 'application/json'
+    'x-ms-documentdb-partitionkeyrangeid': '0'
+    'x-ms-client-id': 'f5475653-918b-4652-bea2-be877c64afc5'
+    'x-ms-cosmos-correlated-activityid': '0b44236a-ca1f-4399-b4c6-19ab497e18de'
+    'x-ms-cosmos-intended-collection-rid': 'CukCANq+Jx8='
+    'x-ms-thinclient-proxy-resource-type': 'docs'
+    'x-ms-thinclient-proxy-operation-type': 'SqlQuery'
+    'x-ms-documentdb-isquery': 'true'
+    'x-ms-session-token': '0:-1#5'
+    'Content-Length': '78'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-02-14 19:16:22,872 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-activity-id': 'f2c438a0-1edb-4ea1-8386-c257a19ffdec'
+    'x-ms-last-state-change-utc': 'Wed, 11 Feb 2026 15:20:26.023 GMT'
+    'x-ms-resource-quota': 'documentSize=51200;documentsSize=52428800;documentsCount=-1;collectionSize=52428800;'
+    'x-ms-resource-usage': 'documentSize=0;documentsSize=17;documentsCount=3;collectionSize=18;'
+    'x-ms-schemaversion': '1.21'
+    'lsn': '5'
+    'x-ms-item-count': '1'
+    'x-ms-request-charge': '3.5'
+    'x-ms-alt-content-path': 'dbs/articles/colls/articles'
+    'x-ms-content-path': 'CukCANq+Jx8='
+    'x-ms-documentdb-partitionkeyrangeid': '0'
+    'x-ms-xp-role': '1'
+    'x-ms-cosmos-query-execution-info': '{"reverseRidEnabled":false,"reverseIndexScan":false}'
+    'x-ms-global-Committed-lsn': '5'
+    'x-ms-number-of-read-regions': '0'
+    'x-ms-transport-request-id': '1'
+    'x-ms-cosmos-llsn': '5'
+    'x-ms-session-token': '0:-1#5'
+    'x-ms-request-duration-ms': '3.68'
+    'x-ms-serviceversion': 'version=2.14.0.0'
+    'x-ms-cosmos-is-partition-key-delete-pending': 'false'
+    'x-ms-cosmos-physical-partition-id': '0'
+    'x-ms-cosmos-internal-partition-id': 'REDACTED'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:21 GMT'
+2026-02-14 19:16:22,984 - httpx - INFO - HTTP Request: POST https://eastus.api.cognitive.microsoft.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2024-08-01-preview "HTTP/1.1 200 OK"
+2026-02-14 19:16:22,985 - embeddings - INFO - Generated 3 embeddings
+2026-02-14 19:16:22,986 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/dbs/articles/colls/agent-state/'
+Request method: 'GET'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': '9fb8b4c2-1914-4a46-8719-250c3098b815'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:22 GMT'
+    'authorization': 'REDACTED'
+    'Accept': 'application/json'
+    'x-ms-client-id': 'f5475653-918b-4652-bea2-be877c64afc5'
+    'x-ms-thinclient-proxy-resource-type': 'colls'
+    'x-ms-thinclient-proxy-operation-type': 'Read'
+    'Content-Length': '0'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+No body was attached to the request
+2026-02-14 19:16:23,101 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Content-Location': 'https://aan-dev-cosmos-eastus.documents.azure.com/dbs/articles/colls/agent-state/'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-activity-id': '9fb8b4c2-1914-4a46-8719-250c3098b815'
+    'x-ms-last-state-change-utc': 'Sat, 14 Feb 2026 01:40:42.329 GMT'
+    'etag': '"0000d206-0000-0100-0000-699119e00000"'
+    'x-ms-schemaversion': '1.21'
+    'collection-partition-index': 'REDACTED'
+    'collection-service-index': 'REDACTED'
+    'lsn': '1'
+    'x-ms-request-charge': '2'
+    'x-ms-alt-content-path': 'dbs/articles'
+    'x-ms-content-path': 'CukCAA=='
+    'x-ms-documentdb-partitionkeyrangeid': '0'
+    'x-ms-xp-role': '1'
+    'x-ms-global-Committed-lsn': '1'
+    'x-ms-number-of-read-regions': '0'
+    'x-ms-item-lsn': '1'
+    'x-ms-transport-request-id': '1'
+    'x-ms-cosmos-llsn': '1'
+    'x-ms-cosmos-item-llsn': '1'
+    'x-ms-session-token': '0:-1#1'
+    'x-ms-request-duration-ms': '0.844'
+    'x-ms-serviceversion': 'version=2.14.0.0'
+    'x-ms-cosmos-physical-partition-id': '0'
+    'x-ms-cosmos-max-content-length': 'REDACTED'
+    'x-ms-cosmos-internal-partition-id': 'REDACTED'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:22 GMT'
+2026-02-14 19:16:23,102 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/dbs/articles/colls/agent-state/docs/'
+Request method: 'POST'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': '43cadab4-3abb-45dc-9cd3-d32b716e4192'
+    'x-ms-documentdb-partitionkey': '["rule-accuracy"]'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:23 GMT'
+    'authorization': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Accept': 'application/json'
+    'x-ms-client-id': 'f5475653-918b-4652-bea2-be877c64afc5'
+    'x-ms-cosmos-intended-collection-rid': 'CukCAKGHHfU='
+    'x-ms-thinclient-proxy-resource-type': 'docs'
+    'x-ms-thinclient-proxy-operation-type': 'Upsert'
+    'x-ms-documentdb-is-upsert': 'True'
+    'Content-Length': '32873'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-02-14 19:16:23,261 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 201
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-activity-id': '43cadab4-3abb-45dc-9cd3-d32b716e4192'
+    'x-ms-last-state-change-utc': 'Sat, 14 Feb 2026 01:40:20.599 GMT'
+    'etag': '"8302cf1c-0000-0100-0000-69912c770000"'
+    'x-ms-resource-quota': 'documentSize=51200;documentsSize=52428800;documentsCount=-1;collectionSize=52428800;'
+    'x-ms-resource-usage': 'documentSize=0;documentsSize=13;documentsCount=0;collectionSize=13;'
+    'x-ms-schemaversion': '1.21'
+    'lsn': '2'
+    'x-ms-request-charge': '284.24'
+    'x-ms-alt-content-path': 'dbs/articles/colls/agent-state'
+    'x-ms-content-path': 'CukCAKGHHfU='
+    'x-ms-quorum-acked-lsn': '1'
+    'x-ms-current-write-quorum': '3'
+    'x-ms-current-replica-set-size': '4'
+    'x-ms-documentdb-partitionkeyrangeid': '0'
+    'x-ms-xp-role': '1'
+    'x-ms-global-Committed-lsn': '1'
+    'x-ms-number-of-read-regions': '0'
+    'x-ms-transport-request-id': '1'
+    'x-ms-cosmos-llsn': '2'
+    'x-ms-cosmos-quorum-acked-llsn': '1'
+    'x-ms-session-token': '0:-1#2'
+    'x-ms-request-duration-ms': '23.69'
+    'x-ms-serviceversion': 'version=2.14.0.0'
+    'x-ms-cosmos-physical-partition-id': '0'
+    'x-ms-cosmos-internal-partition-id': 'REDACTED'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:22 GMT'
+2026-02-14 19:16:23,262 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/dbs/articles/colls/agent-state/docs/'
+Request method: 'POST'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': 'ec1d9012-13d7-40f6-8ada-352796320554'
+    'x-ms-documentdb-partitionkey': '["rule-tone"]'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:23 GMT'
+    'authorization': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Accept': 'application/json'
+    'x-ms-client-id': 'f5475653-918b-4652-bea2-be877c64afc5'
+    'x-ms-cosmos-intended-collection-rid': 'CukCAKGHHfU='
+    'x-ms-thinclient-proxy-resource-type': 'docs'
+    'x-ms-thinclient-proxy-operation-type': 'Upsert'
+    'x-ms-documentdb-is-upsert': 'True'
+    'Content-Length': '32903'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-02-14 19:16:23,400 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 201
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-activity-id': 'ec1d9012-13d7-40f6-8ada-352796320554'
+    'x-ms-last-state-change-utc': 'Sat, 14 Feb 2026 01:40:20.599 GMT'
+    'etag': '"8302d61c-0000-0100-0000-69912c770000"'
+    'x-ms-resource-quota': 'documentSize=51200;documentsSize=52428800;documentsCount=-1;collectionSize=52428800;'
+    'x-ms-resource-usage': 'documentSize=0;documentsSize=26;documentsCount=1;collectionSize=26;'
+    'x-ms-schemaversion': '1.21'
+    'lsn': '3'
+    'x-ms-request-charge': '287.67'
+    'x-ms-alt-content-path': 'dbs/articles/colls/agent-state'
+    'x-ms-content-path': 'CukCAKGHHfU='
+    'x-ms-quorum-acked-lsn': '2'
+    'x-ms-current-write-quorum': '3'
+    'x-ms-current-replica-set-size': '4'
+    'x-ms-documentdb-partitionkeyrangeid': '0'
+    'x-ms-xp-role': '1'
+    'x-ms-global-Committed-lsn': '2'
+    'x-ms-number-of-read-regions': '0'
+    'x-ms-transport-request-id': '2'
+    'x-ms-cosmos-llsn': '3'
+    'x-ms-cosmos-quorum-acked-llsn': '2'
+    'x-ms-session-token': '0:-1#3'
+    'x-ms-request-duration-ms': '23.426'
+    'x-ms-serviceversion': 'version=2.14.0.0'
+    'x-ms-cosmos-physical-partition-id': '0'
+    'x-ms-cosmos-internal-partition-id': 'REDACTED'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:22 GMT'
+2026-02-14 19:16:23,401 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/dbs/articles/colls/agent-state/docs/'
+Request method: 'POST'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': '68e44f56-7288-4bae-8532-69f6d5e3b904'
+    'x-ms-documentdb-partitionkey': '["rule-length"]'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:23 GMT'
+    'authorization': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Accept': 'application/json'
+    'x-ms-client-id': 'f5475653-918b-4652-bea2-be877c64afc5'
+    'x-ms-cosmos-intended-collection-rid': 'CukCAKGHHfU='
+    'x-ms-thinclient-proxy-resource-type': 'docs'
+    'x-ms-thinclient-proxy-operation-type': 'Upsert'
+    'x-ms-documentdb-is-upsert': 'True'
+    'Content-Length': '32878'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-02-14 19:16:23,542 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 201
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-activity-id': '68e44f56-7288-4bae-8532-69f6d5e3b904'
+    'x-ms-last-state-change-utc': 'Sat, 14 Feb 2026 01:40:20.599 GMT'
+    'etag': '"8302da1c-0000-0100-0000-69912c770000"'
+    'x-ms-resource-quota': 'documentSize=51200;documentsSize=52428800;documentsCount=-1;collectionSize=52428800;'
+    'x-ms-resource-usage': 'documentSize=0;documentsSize=39;documentsCount=2;collectionSize=39;'
+    'x-ms-schemaversion': '1.21'
+    'lsn': '4'
+    'x-ms-request-charge': '285'
+    'x-ms-alt-content-path': 'dbs/articles/colls/agent-state'
+    'x-ms-content-path': 'CukCAKGHHfU='
+    'x-ms-quorum-acked-lsn': '3'
+    'x-ms-current-write-quorum': '3'
+    'x-ms-current-replica-set-size': '4'
+    'x-ms-documentdb-partitionkeyrangeid': '0'
+    'x-ms-xp-role': '1'
+    'x-ms-global-Committed-lsn': '3'
+    'x-ms-number-of-read-regions': '0'
+    'x-ms-transport-request-id': '3'
+    'x-ms-cosmos-llsn': '4'
+    'x-ms-cosmos-quorum-acked-llsn': '3'
+    'x-ms-session-token': '0:-1#4'
+    'x-ms-request-duration-ms': '23.877'
+    'x-ms-serviceversion': 'version=2.14.0.0'
+    'x-ms-cosmos-physical-partition-id': '0'
+    'x-ms-cosmos-internal-partition-id': 'REDACTED'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:22 GMT'
+2026-02-14 19:16:23,543 - embeddings - INFO - Created embeddings for 3 brand rules
+{"timestamp": "2026-02-14 19:16:23,702", "agent": "scout", "level": "INFO", "message": "Initialized agent"}
+{"timestamp": "2026-02-14 19:16:23,702", "agent": "scout", "level": "INFO", "message": "Initialized agent"}
+2026-02-14 19:16:23,702 - scout - INFO - Initialized agent
+{"timestamp": "2026-02-14 19:16:23,869", "agent": "prof", "level": "INFO", "message": "Initialized agent"}
+{"timestamp": "2026-02-14 19:16:23,869", "agent": "prof", "level": "INFO", "message": "Initialized agent"}
+2026-02-14 19:16:23,869 - prof - INFO - Initialized agent
+{"timestamp": "2026-02-14 19:16:24,029", "agent": "scribe", "level": "INFO", "message": "Initialized agent"}
+{"timestamp": "2026-02-14 19:16:24,029", "agent": "scribe", "level": "INFO", "message": "Initialized agent"}
+2026-02-14 19:16:24,029 - scribe - INFO - Initialized agent
+{"timestamp": "2026-02-14 19:16:24,192", "agent": "judge", "level": "INFO", "message": "Initialized agent"}
+{"timestamp": "2026-02-14 19:16:24,192", "agent": "judge", "level": "INFO", "message": "Initialized agent"}
+2026-02-14 19:16:24,192 - judge - INFO - Initialized agent
+{"timestamp": "2026-02-14 19:16:24,354", "agent": "pixel", "level": "INFO", "message": "Initialized agent"}
+{"timestamp": "2026-02-14 19:16:24,354", "agent": "pixel", "level": "INFO", "message": "Initialized agent"}
+2026-02-14 19:16:24,354 - pixel - INFO - Initialized agent
+{"timestamp": "2026-02-14 19:16:24,527", "agent": "ops", "level": "INFO", "message": "Initialized agent"}
+{"timestamp": "2026-02-14 19:16:24,527", "agent": "ops", "level": "INFO", "message": "Initialized agent"}
+2026-02-14 19:16:24,527 - ops - INFO - Initialized agent
+2026-02-14 19:16:24,528 - orchestrator - INFO - Orchestrator initialized with 6 agents
+2026-02-14 19:16:24,528 - workflow - INFO - Starting batch workflow: 2 articles
+2026-02-14 19:16:24,528 - orchestrator - INFO - Starting article pipeline: 0ac0f850-97a5-4eae-a2c9-91b1f386410b
+2026-02-14 19:16:24,528 - orchestrator - INFO - Article ID: 56af3608-24b6-4fd3-9931-ddb951a3555d
+2026-02-14 19:16:24,528 - orchestrator - INFO - Stage 1: Scout (newsworthiness screening)
+2026-02-14 19:16:24,528 - orchestrator - INFO - Starting article pipeline: 4b5c4dc2-b445-44d3-855f-e5e2c88dc582
+2026-02-14 19:16:24,528 - orchestrator - INFO - Article ID: 98db2d81-c860-49ef-9148-bb6898ec56fd
+2026-02-14 19:16:24,528 - orchestrator - INFO - Stage 1: Scout (newsworthiness screening)
+2026-02-14 19:16:25,489 - httpx - INFO - HTTP Request: POST https://eastus.api.cognitive.microsoft.com/openai/deployments/gpt-4o-mini/chat/completions?api-version=2024-08-01-preview "HTTP/1.1 200 OK"
+{"timestamp": "2026-02-14 19:16:25,490", "agent": "scout", "level": "INFO", "message": "scout execution successful"}
+{"timestamp": "2026-02-14 19:16:25,490", "agent": "scout", "level": "INFO", "message": "scout execution successful"}
+2026-02-14 19:16:25,490 - scout - INFO - scout execution successful
+2026-02-14 19:16:25,490 - orchestrator - INFO - scout completed in 962ms
+2026-02-14 19:16:25,490 - orchestrator - INFO - Stage 2: Prof (fact-checking & entity extraction)
+2026-02-14 19:16:25,501 - httpx - INFO - HTTP Request: POST https://eastus.api.cognitive.microsoft.com/openai/deployments/gpt-4o-mini/chat/completions?api-version=2024-08-01-preview "HTTP/1.1 200 OK"
+{"timestamp": "2026-02-14 19:16:25,501", "agent": "scout", "level": "INFO", "message": "scout execution successful"}
+{"timestamp": "2026-02-14 19:16:25,501", "agent": "scout", "level": "INFO", "message": "scout execution successful"}
+2026-02-14 19:16:25,501 - scout - INFO - scout execution successful
+2026-02-14 19:16:25,502 - orchestrator - INFO - scout completed in 973ms
+2026-02-14 19:16:25,502 - orchestrator - INFO - Stage 2: Prof (fact-checking & entity extraction)
+2026-02-14 19:16:26,185 - httpx - INFO - HTTP Request: POST https://eastus.api.cognitive.microsoft.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-08-01-preview "HTTP/1.1 200 OK"
+{"timestamp": "2026-02-14 19:16:26,185", "agent": "prof", "level": "INFO", "message": "prof execution successful"}
+{"timestamp": "2026-02-14 19:16:26,185", "agent": "prof", "level": "INFO", "message": "prof execution successful"}
+2026-02-14 19:16:26,185 - prof - INFO - prof execution successful
+2026-02-14 19:16:26,185 - orchestrator - INFO - prof completed in 695ms
+2026-02-14 19:16:26,185 - orchestrator - INFO - Stage 3: Judge (quality assurance)
+2026-02-14 19:16:26,299 - httpx - INFO - HTTP Request: POST https://eastus.api.cognitive.microsoft.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-08-01-preview "HTTP/1.1 200 OK"
+{"timestamp": "2026-02-14 19:16:26,299", "agent": "prof", "level": "INFO", "message": "prof execution successful"}
+{"timestamp": "2026-02-14 19:16:26,299", "agent": "prof", "level": "INFO", "message": "prof execution successful"}
+2026-02-14 19:16:26,299 - prof - INFO - prof execution successful
+2026-02-14 19:16:26,299 - orchestrator - INFO - prof completed in 798ms
+2026-02-14 19:16:26,299 - orchestrator - INFO - Stage 3: Judge (quality assurance)
+2026-02-14 19:16:27,098 - httpx - INFO - HTTP Request: POST https://eastus.api.cognitive.microsoft.com/openai/deployments/gpt-4o-mini/chat/completions?api-version=2024-08-01-preview "HTTP/1.1 200 OK"
+{"timestamp": "2026-02-14 19:16:27,098", "agent": "judge", "level": "INFO", "message": "judge execution successful"}
+{"timestamp": "2026-02-14 19:16:27,098", "agent": "judge", "level": "INFO", "message": "judge execution successful"}
+2026-02-14 19:16:27,098 - judge - INFO - judge execution successful
+2026-02-14 19:16:27,098 - orchestrator - INFO - judge completed in 913ms
+2026-02-14 19:16:27,098 - orchestrator - WARNING - Article flagged for brand compliance issues
+2026-02-14 19:16:27,098 - orchestrator - INFO - Stage 4: Scribe (content formatting & SEO)
+2026-02-14 19:16:27,233 - httpx - INFO - HTTP Request: POST https://eastus.api.cognitive.microsoft.com/openai/deployments/gpt-4o-mini/chat/completions?api-version=2024-08-01-preview "HTTP/1.1 200 OK"
+{"timestamp": "2026-02-14 19:16:27,233", "agent": "judge", "level": "INFO", "message": "judge execution successful"}
+{"timestamp": "2026-02-14 19:16:27,233", "agent": "judge", "level": "INFO", "message": "judge execution successful"}
+2026-02-14 19:16:27,233 - judge - INFO - judge execution successful
+2026-02-14 19:16:27,234 - orchestrator - INFO - judge completed in 934ms
+2026-02-14 19:16:27,234 - orchestrator - WARNING - Article flagged for brand compliance issues
+2026-02-14 19:16:27,234 - orchestrator - INFO - Stage 4: Scribe (content formatting & SEO)
+2026-02-14 19:16:28,524 - httpx - INFO - HTTP Request: POST https://eastus.api.cognitive.microsoft.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-08-01-preview "HTTP/1.1 200 OK"
+{"timestamp": "2026-02-14 19:16:28,525", "agent": "scribe", "level": "INFO", "message": "scribe execution successful"}
+{"timestamp": "2026-02-14 19:16:28,525", "agent": "scribe", "level": "INFO", "message": "scribe execution successful"}
+2026-02-14 19:16:28,525 - scribe - INFO - scribe execution successful
+2026-02-14 19:16:28,525 - orchestrator - INFO - scribe completed in 1427ms
+2026-02-14 19:16:28,525 - orchestrator - INFO - Stage 5: Pixel (image generation)
+2026-02-14 19:16:28,670 - httpx - INFO - HTTP Request: POST https://eastus.api.cognitive.microsoft.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-08-01-preview "HTTP/1.1 200 OK"
+{"timestamp": "2026-02-14 19:16:28,670", "agent": "scribe", "level": "INFO", "message": "scribe execution successful"}
+{"timestamp": "2026-02-14 19:16:28,670", "agent": "scribe", "level": "INFO", "message": "scribe execution successful"}
+2026-02-14 19:16:28,670 - scribe - INFO - scribe execution successful
+2026-02-14 19:16:28,670 - orchestrator - INFO - scribe completed in 1437ms
+2026-02-14 19:16:28,670 - orchestrator - INFO - Stage 5: Pixel (image generation)
+2026-02-14 19:16:29,778 - httpx - INFO - HTTP Request: POST https://eastus.api.cognitive.microsoft.com/openai/deployments/gpt-4o-mini/chat/completions?api-version=2024-08-01-preview "HTTP/1.1 200 OK"
+2026-02-14 19:16:29,850 - httpx - INFO - HTTP Request: POST https://eastus.api.cognitive.microsoft.com/openai/deployments/gpt-4o-mini/chat/completions?api-version=2024-08-01-preview "HTTP/1.1 200 OK"
+2026-02-14 19:16:40,156 - httpx - INFO - HTTP Request: POST https://eastus.api.cognitive.microsoft.com/openai/deployments/dall-e-3/images/generations?api-version=2024-08-01-preview "HTTP/1.1 200 OK"
+{"timestamp": "2026-02-14 19:16:40,157", "agent": "pixel", "level": "INFO", "message": "Generated image for article 98db2d81-c860-49ef-9148-bb6898ec56fd: https://dalleproduse.blob.core.windows.net/private..."}
+{"timestamp": "2026-02-14 19:16:40,157", "agent": "pixel", "level": "INFO", "message": "Generated image for article 98db2d81-c860-49ef-9148-bb6898ec56fd: https://dalleproduse.blob.core.windows.net/private..."}
+2026-02-14 19:16:40,157 - pixel - INFO - Generated image for article 98db2d81-c860-49ef-9148-bb6898ec56fd: https://dalleproduse.blob.core.windows.net/private...
+{"timestamp": "2026-02-14 19:16:40,157", "agent": "pixel", "level": "INFO", "message": "pixel execution successful"}
+{"timestamp": "2026-02-14 19:16:40,157", "agent": "pixel", "level": "INFO", "message": "pixel execution successful"}
+2026-02-14 19:16:40,157 - pixel - INFO - pixel execution successful
+2026-02-14 19:16:40,157 - orchestrator - INFO - pixel completed in 11487ms
+2026-02-14 19:16:40,157 - orchestrator - INFO - Stage 6: Ops (publication & metrics)
+2026-02-14 19:16:40,157 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos.documents.azure.com:443/'
+Request method: 'GET'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': '03d51c22-d3cf-49c2-ab41-befdd23bd631'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:40 GMT'
+    'authorization': 'REDACTED'
+    'Accept': 'application/json'
+    'x-ms-client-id': '8fb8d013-8a1c-4f8f-bfc5-238fbc4abf84'
+    'x-ms-thinclient-proxy-resource-type': 'databaseaccount'
+    'x-ms-thinclient-proxy-operation-type': 'Read'
+    'Content-Length': '0'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+No body was attached to the request
+2026-02-14 19:16:40,552 - httpx - INFO - HTTP Request: POST https://eastus.api.cognitive.microsoft.com/openai/deployments/dall-e-3/images/generations?api-version=2024-08-01-preview "HTTP/1.1 200 OK"
+2026-02-14 19:16:40,573 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Content-Location': 'https://aan-dev-cosmos.documents.azure.com/'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'x-ms-max-media-storage-usage-mb': '0'
+    'x-ms-media-storage-usage-mb': '0'
+    'x-ms-databaseaccount-consumed-mb': 'REDACTED'
+    'x-ms-databaseaccount-reserved-mb': 'REDACTED'
+    'x-ms-databaseaccount-provisioned-mb': 'REDACTED'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:39 GMT'
+2026-02-14 19:16:40,574 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/dbs/articles/colls/articles/'
+Request method: 'GET'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': '1ad14dd8-362d-458d-a498-de89e05523b0'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:40 GMT'
+    'authorization': 'REDACTED'
+    'Accept': 'application/json'
+    'x-ms-client-id': '8fb8d013-8a1c-4f8f-bfc5-238fbc4abf84'
+    'x-ms-thinclient-proxy-resource-type': 'colls'
+    'x-ms-thinclient-proxy-operation-type': 'Read'
+    'Content-Length': '0'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+No body was attached to the request
+2026-02-14 19:16:40,574 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/'
+Request method: 'GET'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': '5cd7ebdd-7072-41d9-a6b6-d9513f1ee29f'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:40 GMT'
+    'authorization': 'REDACTED'
+    'Accept': 'application/json'
+    'x-ms-client-id': '8fb8d013-8a1c-4f8f-bfc5-238fbc4abf84'
+    'x-ms-thinclient-proxy-resource-type': 'databaseaccount'
+    'x-ms-thinclient-proxy-operation-type': 'Read'
+    'Content-Length': '0'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+No body was attached to the request
+2026-02-14 19:16:41,061 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Content-Location': 'https://aan-dev-cosmos-eastus.documents.azure.com/'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'x-ms-max-media-storage-usage-mb': '0'
+    'x-ms-media-storage-usage-mb': '0'
+    'x-ms-databaseaccount-consumed-mb': 'REDACTED'
+    'x-ms-databaseaccount-reserved-mb': 'REDACTED'
+    'x-ms-databaseaccount-provisioned-mb': 'REDACTED'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:40 GMT'
+2026-02-14 19:16:41,088 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Content-Location': 'https://aan-dev-cosmos-eastus.documents.azure.com/dbs/articles/colls/articles/'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-activity-id': '1ad14dd8-362d-458d-a498-de89e05523b0'
+    'x-ms-last-state-change-utc': 'Wed, 11 Feb 2026 15:20:33.236 GMT'
+    'etag': '"0000cd06-0000-0100-0000-699119ba0000"'
+    'x-ms-schemaversion': '1.21'
+    'collection-partition-index': 'REDACTED'
+    'collection-service-index': 'REDACTED'
+    'lsn': '5'
+    'x-ms-request-charge': '2'
+    'x-ms-alt-content-path': 'dbs/articles'
+    'x-ms-content-path': 'CukCAA=='
+    'x-ms-documentdb-partitionkeyrangeid': '0'
+    'x-ms-xp-role': '1'
+    'x-ms-global-Committed-lsn': '5'
+    'x-ms-number-of-read-regions': '0'
+    'x-ms-item-lsn': '1'
+    'x-ms-transport-request-id': '1'
+    'x-ms-cosmos-llsn': '5'
+    'x-ms-cosmos-item-llsn': '1'
+    'x-ms-session-token': '0:-1#5'
+    'x-ms-request-duration-ms': '0.668'
+    'x-ms-serviceversion': 'version=2.14.0.0'
+    'x-ms-cosmos-physical-partition-id': '0'
+    'x-ms-cosmos-max-content-length': 'REDACTED'
+    'x-ms-cosmos-internal-partition-id': 'REDACTED'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:40 GMT'
+2026-02-14 19:16:41,088 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/dbs/articles/colls/articles/docs/'
+Request method: 'POST'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': '32b6a8c4-a896-460f-b279-3021a3fd3cdf'
+    'x-ms-documentdb-partitionkey': '["98db2d81-c860-49ef-9148-bb6898ec56fd"]'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:41 GMT'
+    'authorization': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Accept': 'application/json'
+    'x-ms-client-id': '8fb8d013-8a1c-4f8f-bfc5-238fbc4abf84'
+    'x-ms-cosmos-intended-collection-rid': 'CukCANq+Jx8='
+    'x-ms-thinclient-proxy-resource-type': 'docs'
+    'x-ms-thinclient-proxy-operation-type': 'Upsert'
+    'x-ms-documentdb-is-upsert': 'True'
+    'Content-Length': '881'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-02-14 19:16:41,162 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 201
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-activity-id': '32b6a8c4-a896-460f-b279-3021a3fd3cdf'
+    'x-ms-last-state-change-utc': 'Wed, 11 Feb 2026 15:20:12.698 GMT'
+    'etag': '"87019b96-0000-0100-0000-69912c890000"'
+    'x-ms-resource-quota': 'documentSize=51200;documentsSize=52428800;documentsCount=-1;collectionSize=52428800;'
+    'x-ms-resource-usage': 'documentSize=0;documentsSize=110;documentsCount=3;collectionSize=111;'
+    'x-ms-schemaversion': '1.21'
+    'lsn': '6'
+    'x-ms-request-charge': '9.52'
+    'x-ms-alt-content-path': 'dbs/articles/colls/articles'
+    'x-ms-content-path': 'CukCANq+Jx8='
+    'x-ms-quorum-acked-lsn': '5'
+    'x-ms-current-write-quorum': '3'
+    'x-ms-current-replica-set-size': '4'
+    'x-ms-documentdb-partitionkeyrangeid': '0'
+    'x-ms-xp-role': '1'
+    'x-ms-global-Committed-lsn': '5'
+    'x-ms-number-of-read-regions': '0'
+    'x-ms-transport-request-id': '1'
+    'x-ms-cosmos-llsn': '6'
+    'x-ms-cosmos-quorum-acked-llsn': '5'
+    'x-ms-session-token': '0:-1#6'
+    'x-ms-request-duration-ms': '4.416'
+    'x-ms-serviceversion': 'version=2.14.0.0'
+    'x-ms-cosmos-physical-partition-id': '0'
+    'x-ms-cosmos-internal-partition-id': 'REDACTED'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:40 GMT'
+{"timestamp": "2026-02-14 19:16:41,162", "agent": "ops", "level": "INFO", "message": "Published article 98db2d81-c860-49ef-9148-bb6898ec56fd to Cosmos DB"}
+{"timestamp": "2026-02-14 19:16:41,162", "agent": "ops", "level": "INFO", "message": "Published article 98db2d81-c860-49ef-9148-bb6898ec56fd to Cosmos DB"}
+2026-02-14 19:16:41,162 - ops - INFO - Published article 98db2d81-c860-49ef-9148-bb6898ec56fd to Cosmos DB
+{"timestamp": "2026-02-14 19:16:41,162", "agent": "ops", "level": "INFO", "message": "ops execution successful"}
+{"timestamp": "2026-02-14 19:16:41,162", "agent": "ops", "level": "INFO", "message": "ops execution successful"}
+2026-02-14 19:16:41,162 - ops - INFO - ops execution successful
+2026-02-14 19:16:41,162 - orchestrator - INFO - ops completed in 1005ms
+2026-02-14 19:16:41,162 - orchestrator - INFO - Article successfully published: 98db2d81-c860-49ef-9148-bb6898ec56fd
+{"timestamp": "2026-02-14 19:16:41,162", "agent": "pixel", "level": "INFO", "message": "Generated image for article 56af3608-24b6-4fd3-9931-ddb951a3555d: https://dalleproduse.blob.core.windows.net/private..."}
+{"timestamp": "2026-02-14 19:16:41,162", "agent": "pixel", "level": "INFO", "message": "Generated image for article 56af3608-24b6-4fd3-9931-ddb951a3555d: https://dalleproduse.blob.core.windows.net/private..."}
+2026-02-14 19:16:41,162 - pixel - INFO - Generated image for article 56af3608-24b6-4fd3-9931-ddb951a3555d: https://dalleproduse.blob.core.windows.net/private...
+{"timestamp": "2026-02-14 19:16:41,162", "agent": "pixel", "level": "INFO", "message": "pixel execution successful"}
+{"timestamp": "2026-02-14 19:16:41,162", "agent": "pixel", "level": "INFO", "message": "pixel execution successful"}
+2026-02-14 19:16:41,162 - pixel - INFO - pixel execution successful
+2026-02-14 19:16:41,162 - orchestrator - INFO - pixel completed in 12637ms
+2026-02-14 19:16:41,162 - orchestrator - INFO - Stage 6: Ops (publication & metrics)
+2026-02-14 19:16:41,163 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos.documents.azure.com:443/'
+Request method: 'GET'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': 'eb1a922f-5fbd-45db-a6f6-8f266a9c99dd'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:41 GMT'
+    'authorization': 'REDACTED'
+    'Accept': 'application/json'
+    'x-ms-client-id': '6e278b60-4a67-4488-a0c7-aa81ac6571ba'
+    'x-ms-thinclient-proxy-resource-type': 'databaseaccount'
+    'x-ms-thinclient-proxy-operation-type': 'Read'
+    'Content-Length': '0'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+No body was attached to the request
+2026-02-14 19:16:41,558 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Content-Location': 'https://aan-dev-cosmos.documents.azure.com/'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'x-ms-max-media-storage-usage-mb': '0'
+    'x-ms-media-storage-usage-mb': '0'
+    'x-ms-databaseaccount-consumed-mb': 'REDACTED'
+    'x-ms-databaseaccount-reserved-mb': 'REDACTED'
+    'x-ms-databaseaccount-provisioned-mb': 'REDACTED'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:41 GMT'
+2026-02-14 19:16:41,559 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/dbs/articles/colls/articles/'
+Request method: 'GET'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': '05e75eee-ae6a-4188-a18a-c218494bcca4'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:41 GMT'
+    'authorization': 'REDACTED'
+    'Accept': 'application/json'
+    'x-ms-client-id': '6e278b60-4a67-4488-a0c7-aa81ac6571ba'
+    'x-ms-thinclient-proxy-resource-type': 'colls'
+    'x-ms-thinclient-proxy-operation-type': 'Read'
+    'Content-Length': '0'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+No body was attached to the request
+2026-02-14 19:16:41,559 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/'
+Request method: 'GET'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': '900cb8bc-d307-498a-8ac1-c939efa5879d'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:41 GMT'
+    'authorization': 'REDACTED'
+    'Accept': 'application/json'
+    'x-ms-client-id': '6e278b60-4a67-4488-a0c7-aa81ac6571ba'
+    'x-ms-thinclient-proxy-resource-type': 'databaseaccount'
+    'x-ms-thinclient-proxy-operation-type': 'Read'
+    'Content-Length': '0'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+No body was attached to the request
+2026-02-14 19:16:42,060 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Content-Location': 'https://aan-dev-cosmos-eastus.documents.azure.com/'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'x-ms-max-media-storage-usage-mb': '0'
+    'x-ms-media-storage-usage-mb': '0'
+    'x-ms-databaseaccount-consumed-mb': 'REDACTED'
+    'x-ms-databaseaccount-reserved-mb': 'REDACTED'
+    'x-ms-databaseaccount-provisioned-mb': 'REDACTED'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:41 GMT'
+2026-02-14 19:16:42,091 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 200
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Content-Location': 'https://aan-dev-cosmos-eastus.documents.azure.com/dbs/articles/colls/articles/'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-activity-id': '05e75eee-ae6a-4188-a18a-c218494bcca4'
+    'x-ms-last-state-change-utc': 'Wed, 11 Feb 2026 15:20:33.236 GMT'
+    'etag': '"0000cd06-0000-0100-0000-699119ba0000"'
+    'x-ms-schemaversion': '1.21'
+    'collection-partition-index': 'REDACTED'
+    'collection-service-index': 'REDACTED'
+    'lsn': '6'
+    'x-ms-request-charge': '2'
+    'x-ms-alt-content-path': 'dbs/articles'
+    'x-ms-content-path': 'CukCAA=='
+    'x-ms-documentdb-partitionkeyrangeid': '0'
+    'x-ms-xp-role': '1'
+    'x-ms-global-Committed-lsn': '6'
+    'x-ms-number-of-read-regions': '0'
+    'x-ms-item-lsn': '1'
+    'x-ms-transport-request-id': '1'
+    'x-ms-cosmos-llsn': '6'
+    'x-ms-cosmos-item-llsn': '1'
+    'x-ms-session-token': '0:-1#6'
+    'x-ms-request-duration-ms': '0.699'
+    'x-ms-serviceversion': 'version=2.14.0.0'
+    'x-ms-cosmos-physical-partition-id': '0'
+    'x-ms-cosmos-max-content-length': 'REDACTED'
+    'x-ms-cosmos-internal-partition-id': 'REDACTED'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:41 GMT'
+2026-02-14 19:16:42,092 - azure.cosmos._cosmos_http_logging_policy - INFO - Request URL: 'https://aan-dev-cosmos-eastus.documents.azure.com:443/dbs/articles/colls/articles/docs/'
+Request method: 'POST'
+Request headers:
+    'Cache-Control': 'no-cache'
+    'x-ms-version': '2020-07-15'
+    'x-ms-documentdb-query-iscontinuationexpected': 'False'
+    'x-ms-consistency-level': 'Session'
+    'x-ms-cosmos-sdk-supportedcapabilities': '1'
+    'x-ms-activity-id': '37865292-0ab7-46c5-90ba-47f96a30e468'
+    'x-ms-documentdb-partitionkey': '["56af3608-24b6-4fd3-9931-ddb951a3555d"]'
+    'x-ms-date': 'Sun, 15 Feb 2026 02:16:42 GMT'
+    'authorization': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Accept': 'application/json'
+    'x-ms-client-id': '6e278b60-4a67-4488-a0c7-aa81ac6571ba'
+    'x-ms-cosmos-intended-collection-rid': 'CukCANq+Jx8='
+    'x-ms-thinclient-proxy-resource-type': 'docs'
+    'x-ms-thinclient-proxy-operation-type': 'Upsert'
+    'x-ms-documentdb-is-upsert': 'True'
+    'Content-Length': '832'
+    'User-Agent': 'azsdk-python-cosmos/4.14.6 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+A body is sent with the request
+2026-02-14 19:16:42,182 - azure.cosmos._cosmos_http_logging_policy - INFO - Response status: 201
+Response headers:
+    'Cache-Control': 'no-store, no-cache'
+    'Pragma': 'no-cache'
+    'Transfer-Encoding': 'REDACTED'
+    'Content-Type': 'application/json'
+    'Server': 'Microsoft-HTTPAPI/2.0'
+    'Strict-Transport-Security': 'max-age=31536000'
+    'x-ms-activity-id': '37865292-0ab7-46c5-90ba-47f96a30e468'
+    'x-ms-last-state-change-utc': 'Wed, 11 Feb 2026 15:20:12.698 GMT'
+    'etag': '"87019f96-0000-0100-0000-69912c8a0000"'
+    'x-ms-resource-quota': 'documentSize=51200;documentsSize=52428800;documentsCount=-1;collectionSize=52428800;'
+    'x-ms-resource-usage': 'documentSize=0;documentsSize=111;documentsCount=4;collectionSize=112;'
+    'x-ms-schemaversion': '1.21'
+    'lsn': '7'
+    'x-ms-request-charge': '9.52'
+    'x-ms-alt-content-path': 'dbs/articles/colls/articles'
+    'x-ms-content-path': 'CukCANq+Jx8='
+    'x-ms-quorum-acked-lsn': '6'
+    'x-ms-current-write-quorum': '3'
+    'x-ms-current-replica-set-size': '4'
+    'x-ms-documentdb-partitionkeyrangeid': '0'
+    'x-ms-xp-role': '1'
+    'x-ms-global-Committed-lsn': '6'
+    'x-ms-number-of-read-regions': '0'
+    'x-ms-transport-request-id': '1'
+    'x-ms-cosmos-llsn': '7'
+    'x-ms-cosmos-quorum-acked-llsn': '6'
+    'x-ms-session-token': '0:-1#7'
+    'x-ms-request-duration-ms': '4.155'
+    'x-ms-serviceversion': 'version=2.14.0.0'
+    'x-ms-cosmos-physical-partition-id': '0'
+    'x-ms-cosmos-internal-partition-id': 'REDACTED'
+    'x-ms-gatewayversion': 'version=2.14.0'
+    'Date': 'Sun, 15 Feb 2026 02:16:41 GMT'
+{"timestamp": "2026-02-14 19:16:42,182", "agent": "ops", "level": "INFO", "message": "Published article 56af3608-24b6-4fd3-9931-ddb951a3555d to Cosmos DB"}
+{"timestamp": "2026-02-14 19:16:42,182", "agent": "ops", "level": "INFO", "message": "Published article 56af3608-24b6-4fd3-9931-ddb951a3555d to Cosmos DB"}
+2026-02-14 19:16:42,182 - ops - INFO - Published article 56af3608-24b6-4fd3-9931-ddb951a3555d to Cosmos DB
+{"timestamp": "2026-02-14 19:16:42,182", "agent": "ops", "level": "INFO", "message": "ops execution successful"}
+{"timestamp": "2026-02-14 19:16:42,182", "agent": "ops", "level": "INFO", "message": "ops execution successful"}
+2026-02-14 19:16:42,182 - ops - INFO - ops execution successful
+2026-02-14 19:16:42,182 - orchestrator - INFO - ops completed in 1020ms
+2026-02-14 19:16:42,182 - orchestrator - INFO - Article successfully published: 56af3608-24b6-4fd3-9931-ddb951a3555d
+2026-02-14 19:16:42,182 - workflow - INFO - Batch 1 complete: 2 articles
+2026-02-14 19:16:42,182 - workflow - INFO - Article published: 56af3608-24b6-4fd3-9931-ddb951a3555d
+2026-02-14 19:16:42,182 - workflow - INFO - Article published: 98db2d81-c860-49ef-9148-bb6898ec56fd
+C:\Users\agjam\OneDrive\Desktop\newsroom\agents\test_full_pipeline.py:196: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "test_timestamp": datetime.utcnow().isoformat(),
+{"timestamp": "2026-02-14 19:16:42,339", "agent": "scout", "level": "INFO", "message": "Initialized agent"}
+{"timestamp": "2026-02-14 19:16:42,339", "agent": "scout", "level": "INFO", "message": "Initialized agent"}
+{"timestamp": "2026-02-14 19:16:42,339", "agent": "scout", "level": "INFO", "message": "Initialized agent"}
+2026-02-14 19:16:42,339 - scout - INFO - Initialized agent
+{"timestamp": "2026-02-14 19:16:42,498", "agent": "prof", "level": "INFO", "message": "Initialized agent"}
+{"timestamp": "2026-02-14 19:16:42,498", "agent": "prof", "level": "INFO", "message": "Initialized agent"}
+{"timestamp": "2026-02-14 19:16:42,498", "agent": "prof", "level": "INFO", "message": "Initialized agent"}
+2026-02-14 19:16:42,498 - prof - INFO - Initialized agent
+{"timestamp": "2026-02-14 19:16:42,655", "agent": "scribe", "level": "INFO", "message": "Initialized agent"}
+{"timestamp": "2026-02-14 19:16:42,655", "agent": "scribe", "level": "INFO", "message": "Initialized agent"}
+{"timestamp": "2026-02-14 19:16:42,655", "agent": "scribe", "level": "INFO", "message": "Initialized agent"}
+2026-02-14 19:16:42,655 - scribe - INFO - Initialized agent
+{"timestamp": "2026-02-14 19:16:42,815", "agent": "judge", "level": "INFO", "message": "Initialized agent"}
+{"timestamp": "2026-02-14 19:16:42,815", "agent": "judge", "level": "INFO", "message": "Initialized agent"}
+{"timestamp": "2026-02-14 19:16:42,815", "agent": "judge", "level": "INFO", "message": "Initialized agent"}
+2026-02-14 19:16:42,815 - judge - INFO - Initialized agent
+{"timestamp": "2026-02-14 19:16:42,972", "agent": "pixel", "level": "INFO", "message": "Initialized agent"}
+{"timestamp": "2026-02-14 19:16:42,972", "agent": "pixel", "level": "INFO", "message": "Initialized agent"}
+{"timestamp": "2026-02-14 19:16:42,972", "agent": "pixel", "level": "INFO", "message": "Initialized agent"}
+2026-02-14 19:16:42,972 - pixel - INFO - Initialized agent
+{"timestamp": "2026-02-14 19:16:43,132", "agent": "ops", "level": "INFO", "message": "Initialized agent"}
+{"timestamp": "2026-02-14 19:16:43,132", "agent": "ops", "level": "INFO", "message": "Initialized agent"}
+{"timestamp": "2026-02-14 19:16:43,132", "agent": "ops", "level": "INFO", "message": "Initialized agent"}
+2026-02-14 19:16:43,132 - ops - INFO - Initialized agent
+2026-02-14 19:16:43,132 - orchestrator - INFO - Orchestrator initialized with 6 agents
+2026-02-14 19:16:43,132 - orchestrator - INFO - Starting article pipeline: b7fe8e6d-3d97-4205-b826-2dc5533e7084
+2026-02-14 19:16:43,132 - orchestrator - INFO - Article ID: 32153d8d-7250-4f11-bc51-1adc7f53efdb
+2026-02-14 19:16:43,132 - orchestrator - INFO - Stage 1: Scout (newsworthiness screening)
+2026-02-14 19:16:43,882 - httpx - INFO - HTTP Request: POST https://eastus.api.cognitive.microsoft.com/openai/deployments/gpt-4o-mini/chat/completions?api-version=2024-08-01-preview "HTTP/1.1 200 OK"
+{"timestamp": "2026-02-14 19:16:43,882", "agent": "scout", "level": "INFO", "message": "scout execution successful"}
+{"timestamp": "2026-02-14 19:16:43,882", "agent": "scout", "level": "INFO", "message": "scout execution successful"}
+{"timestamp": "2026-02-14 19:16:43,882", "agent": "scout", "level": "INFO", "message": "scout execution successful"}
+2026-02-14 19:16:43,882 - scout - INFO - scout execution successful
+2026-02-14 19:16:43,882 - orchestrator - INFO - scout completed in 750ms
+2026-02-14 19:16:43,882 - orchestrator - INFO - Article rejected by Scout (score: 2.0)
+2026-02-14 19:16:43,882 - pipeline_test - ERROR - Test failed: 'charmap' codec can't encode character '\u2713' in position 0: character maps to <undefined>
+Traceback (most recent call last):
+  File "C:\Users\agjam\OneDrive\Desktop\newsroom\agents\test_full_pipeline.py", line 259, in main
+    await test_error_handling()
+  File "C:\Users\agjam\OneDrive\Desktop\newsroom\agents\test_full_pipeline.py", line 244, in test_error_handling
+    print("\u2713 Article correctly rejected by Scout due to low quality")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\agjam\AppData\Local\Python\pythoncore-3.14-64\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2713' in position 0: character maps to <undefined>
+
+================================================================================
+FULL PIPELINE TEST - Multi-Agent Article Processing
+================================================================================
+
+[STAGE 1] Running Multi-Agent Orchestration Pipeline
+--------------------------------------------------------------------------------
+
+Pipeline Status: PUBLISHED
+Article ID: 4ba4f282-6ee0-4f7b-a706-b7d9ff4cf1cf
+Published URL: https://newsroom.example.com/articles/4ba4f282-6ee0-4f7b-a706-b7d9ff4cf1cf
+Quality Score: 9.0
+Brand Compliant: True
+Image URL: https://dalleproduse.blob.core.windows.net/private/images/e6...
+
+Agent Execution Times:
+  scout: 1313ms
+  prof: 1170ms
+  judge: 676ms
+  scribe: 1542ms
+  pixel: 11795ms
+  ops: 1035ms
+
+Total Pipeline Time: 17532ms
+
+[STAGE 2] Generating Vector Embeddings
+--------------------------------------------------------------------------------
+Generated embedding with 1536 dimensions
+Embedding dimension: 1536
+Embedding model: text-embedding-3-small
+
+[STAGE 3] Testing Semantic Search
+--------------------------------------------------------------------------------
+
+Query: 'quantum computing breakthrough'
+  1. Revolutionary Quantum Computing Breakthrough Announced
+     Similarity: 0.736
+     Keywords: 
+
+Query: 'artificial intelligence and machine learning'
+  1. Revolutionary Quantum Computing Breakthrough Announced
+     Similarity: 0.219
+     Keywords: 
+
+Query: 'cryptography and security'
+  1. Revolutionary Quantum Computing Breakthrough Announced
+     Similarity: 0.268
+     Keywords: 
+
+[STAGE 4] Creating Brand Rules Embeddings
+--------------------------------------------------------------------------------
+Created embeddings for 3 brand rules
+
+[STAGE 5] Running Multi-Article Workflow
+--------------------------------------------------------------------------------
+
+Workflow Summary:
+  Total Articles: 2
+  Successful: 2
+  Failed: 0
+  Metrics:
+    Total Time: 17654ms
+    Average per Article: 8827ms
+
+================================================================================
+PIPELINE TEST COMPLETE
+================================================================================
+
+Test Summary:
+{
+  "test_timestamp": "2026-02-15T02:16:42.182786",
+  "pipeline_result": {
+    "status": "PUBLISHED",
+    "article_id": "4ba4f282-6ee0-4f7b-a706-b7d9ff4cf1cf",
+    "total_time_ms": 17532.126
+  },
+  "embeddings_test": {
+    "embedding_dimension": 1536,
+    "search_queries_tested": 3,
+    "brand_rules_created": 3
+  },
+  "workflow_test": {
+    "articles_processed": 2,
+    "successful": 2,
+    "average_time_ms": 8827.166500000001
+  }
+}
+
+================================================================================
+ERROR HANDLING TEST
+================================================================================
+
+Processing minimal article (should be rejected)...
+Result Status: REJECTED_BY_SCOUT
+Article ID: 32153d8d-7250-4f11-bc51-1adc7f53efdb
