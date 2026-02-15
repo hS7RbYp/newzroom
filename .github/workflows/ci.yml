@@ -3,18 +3,12 @@ name: Build & Deploy
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
   workflow_dispatch:
 
 jobs:
   build-and-deploy:
     name: Build & Deploy
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
     
     steps:
       - uses: actions/checkout@v4
@@ -34,19 +28,9 @@ jobs:
         working-directory: dashboard
         run: npm run build
       
-      - name: Copy assets to root
-        run: |
-          cp index.html index.html.bak 2>/dev/null || true
-          cp -r dashboard/out/* . 2>/dev/null || true
-      
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-      
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          path: '.'
-      
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          cname: hs7rbyp.github.io
