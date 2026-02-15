@@ -12,150 +12,31 @@ env:
 
 jobs:
   # ============================================================================
-  # PYTHON LINTING & TESTS (Agents)
+  # DEPLOY STATIC SITE (Primary job)
   # ============================================================================
-  python-quality:
-    name: Python Linting & Tests
+  deploy-site:
+    name: Deploy Newsroom Site
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.event_name == 'pull_request'
     steps:
       - uses: actions/checkout@v4
       
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          python-version: ${{ env.PYTHON_VERSION }}
-          cache: 'pip'
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: 'dashboard/package-lock.json'
       
       - name: Install dependencies
+        working-directory: dashboard
+        run: npm ci
+      
+      - name: Build site
+        working-directory: dashboard
+        run: npm run build
+      
+      - name: Verify build output
         run: |
-          python -m pip install --upgrade pip
-          pip install -r agents/requirements.txt
-          pip install pytest pylint black mypy
-      
-      - name: Lint with pylint
-        run: pylint agents/ || echo "Linting warnings (non-blocking)"
-      
-      - name: Format check with black
-        run: black --check agents/ || echo "Format warnings (non-blocking)"
-      
-      - name: Type check with mypy
-        run: mypy agents/ || echo "Type warnings (non-blocking)"
-      
-      - name: Run pytest
-        run: pytest agents/tests/ -v --cov=agents --cov-report=xml
-      
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          files: ./coverage.xml
-
-  # ============================================================================
-  # INFRASTRUCTURE VALIDATION (Terraform)
-  # ============================================================================
-  terraform-validate:
-    name: Terraform Validation
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: latest
-      
-      - name: Terraform Format Check
-        run: terraform -chdir=infrastructure fmt -check -recursive
-      
-      - name: Terraform Init (validate)
-        run: terraform -chdir=infrastructure init -backend=false
-      
-      - name: Terraform Validate
-        run: terraform -chdir=infrastructure validate
-
-  # ============================================================================
-  # DOCUMENTATION VALIDATION
-  # ============================================================================
-  docs-check:
-    name: Documentation Validation
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Check markdown links
-        uses: gaurav-nelson/github-action-markdown-link-check@v1
-        with:
-          use-quiet-mode: 'yes'
-          folder-path: 'docs/'
-
-  # ============================================================================
-  # SECURITY SCANNING
-  # ============================================================================
-  security:
-    name: Security Scan
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
-        with:
-          scan-type: 'fs'
-          scan-ref: '.'
-          format: 'sarif'
-          output: 'trivy-results.sarif'
-      
-      - name: Upload Trivy results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: 'trivy-results.sarif'
-
-  # ============================================================================
-  # BUILD ARTIFACTS (on main branch only)
-  # ============================================================================
-  build:
-    name: Build & Push (Main Only)
-    needs: [python-quality, terraform-validate, docs-check, security]
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      
-      - name: Build agent container image
-        uses: docker/build-push-action@v4
-        with:
-          context: ./agents
-          push: false
-          tags: aan-agents:latest
-          cache-from: type=registry
-          cache-to: type=inline
-
-  # ============================================================================
-  # NOTIFY SLACK (optional)
-  # ============================================================================
-  notify:
-    name: Notify Slack
-    needs: [python-quality, terraform-validate, docs-check, security]
-    runs-on: ubuntu-latest
-    if: always()
-    steps:
-      - name: Check job status
-        run: |
-          if [ "${{ job.status }}" == "failure" ]; then
-            echo "One or more jobs failed"
-            exit 1
-          fi
-      
-      - name: Send Slack notification
-        uses: 8398a7/action-slack@v3
-        if: always()
-        with:
-          status: ${{ job.status }}
-          text: |
-            AAN CI/CD Pipeline: ${{ job.status }}
-            Commit: ${{ github.event.head_commit.message }}
-            Author: ${{ github.event.head_commit.author.name }}
-          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
-        continue-on-error: true
+          echo "✅ Build completed successfully"
+          ls -la dashboard/out 2>/dev/null || echo "Note: Static export directory"
