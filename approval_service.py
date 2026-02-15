@@ -115,7 +115,7 @@ def submit_article():
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         try:
-            result = loop.run_until_complete(orchestrator.process_article(article_id, article_data))
+            result = loop.run_until_complete(orchestrator.process_article(article_data, request_id=article_id))
         finally:
             loop.close()
         
