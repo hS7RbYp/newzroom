@@ -15,6 +15,7 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "agents"))
 
 from flask import Flask, request, jsonify, Response
+from flask_cors import CORS
 from approval import get_approval_queue, ApprovalStatus
 from orchestrator import ArticleOrchestrator
 from config import get_config
@@ -29,6 +30,15 @@ logger = logging.getLogger("approval_api")
 
 # Flask app
 app = Flask(__name__)
+
+# Enable CORS for dashboard access from port 3000
+CORS(app, resources={
+    r"/api/*": {
+        "origins": ["http://localhost:3000", "http://localhost:3001"],
+        "methods": ["GET", "POST", "PUT", "DELETE"],
+        "allow_headers": ["Content-Type", "Authorization"]
+    }
+})
 
 # Global instances
 orchestrator = ArticleOrchestrator()
