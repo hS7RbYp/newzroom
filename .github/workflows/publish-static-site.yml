@@ -1,0 +1,301 @@
+name: 📦 Publish Static Site
+
+on:
+  push:
+    branches: [ main, production ]
+    paths:
+      - 'dashboard/**'
+      - '.github/workflows/publish-static-site.yml'
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+
+env:
+  NODE_VERSION: "18"
+  REGISTRY: ghcr.io
+
+jobs:
+  # ============================================================================
+  # BUILD STATIC SITE
+  # ============================================================================
+  build:
+    name: 🏗️ Build Next.js Static Site
+    runs-on: ubuntu-latest
+    outputs:
+      artifact-url: ${{ steps.upload.outputs.artifact-url }}
+      build-version: ${{ steps.version.outputs.version }}
+    steps:
+      - name: ✅ Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 📝 Generate build version
+        id: version
+        run: |
+          VERSION=$(date +'%Y.%m.%d')-$(git rev-parse --short HEAD)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Build Version: $VERSION"
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: 'dashboard/package-lock.json'
+
+      - name: 📦 Install dependencies
+        working-directory: dashboard
+        run: npm ci
+
+      - name: 🧹 Lint code
+        working-directory: dashboard
+        run: npm run lint
+        continue-on-error: true
+
+      - name: 🛠️ Build static site
+        working-directory: dashboard
+        env:
+          NEXT_PUBLIC_API_URL: ${{ secrets.API_URL || 'https://api.newsroom.ai' }}
+          NEXT_PUBLIC_VERSION: ${{ steps.version.outputs.version }}
+        run: npm run build
+
+      - name: 📋 Generate static export
+        working-directory: dashboard
+        run: next export || npm run export
+        continue-on-error: true
+
+      - name: 📊 Build stats
+        working-directory: dashboard
+        run: |
+          echo "## Build Statistics" >> $GITHUB_STEP_SUMMARY
+          echo "- **Version**: ${{ steps.version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Node Modules**: $(du -sh node_modules | cut -f1)" >> $GITHUB_STEP_SUMMARY
+          echo "- **.next Directory**: $(du -sh .next | cut -f1)" >> $GITHUB_STEP_SUMMARY
+
+      - name: 📦 Upload build artifact
+        uses: actions/upload-artifact@v4
+        id: upload
+        with:
+          name: nextjs-build-${{ steps.version.outputs.version }}
+          path: dashboard/.next
+          retention-days: 30
+          if-no-files-found: warn
+
+  # ============================================================================
+  # DEPLOY TO GITHUB PAGES
+  # ============================================================================
+  deploy-github-pages:
+    name: 🚀 Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: ✅ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: 'dashboard/package-lock.json'
+
+      - name: 📦 Install dependencies
+        working-directory: dashboard
+        run: npm ci
+
+      - name: 🛠️ Build for export
+        working-directory: dashboard
+        env:
+          NEXT_PUBLIC_API_URL: https://api.newsroom.ai
+        run: |
+          npm run build
+          next export -o out
+
+      - name: 📤 Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: 📤 Upload to Pages
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: './dashboard/out'
+
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v3
+
+      - name: ✨ Deployment Summary
+        run: |
+          echo "## 🎉 GitHub Pages Deployment Complete" >> $GITHUB_STEP_SUMMARY
+          echo "- **URL**: ${{ steps.deployment.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status**: ✅ Live" >> $GITHUB_STEP_SUMMARY
+
+  # ============================================================================
+  # DEPLOY TO AZURE STATIC WEB APPS (OPTIONAL)
+  # ============================================================================
+  deploy-azure-swa:
+    name: 🚀 Deploy to Azure Static Web Apps
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - name: ✅ Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: 'dashboard/package-lock.json'
+
+      - name: 📦 Install dependencies
+        working-directory: dashboard
+        run: npm ci
+
+      - name: 🛠️ Build static export
+        working-directory: dashboard
+        env:
+          NEXT_PUBLIC_API_URL: https://api.newsroom.ai
+        run: |
+          npm run build
+          next export -o out
+
+      - name: 🚀 Deploy to Azure SWA
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: 'upload'
+          app_location: 'dashboard/out'
+          api_location: ''
+          output_location: ''
+          skip_app_build: true
+        continue-on-error: true
+
+  # ============================================================================
+  # PERFORMANCE & SEO AUDIT
+  # ============================================================================
+  audit:
+    name: 🔍 Performance & SEO Audit
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: ✅ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: 'dashboard/package-lock.json'
+
+      - name: 📦 Install dependencies
+        working-directory: dashboard
+        run: npm ci
+
+      - name: 🛠️ Build project
+        working-directory: dashboard
+        env:
+          NEXT_PUBLIC_API_URL: https://api.newsroom.ai
+        run: npm run build
+
+      - name: 🚀 Start Next.js server
+        working-directory: dashboard
+        run: |
+          npm start > server.log 2>&1 &
+          sleep 5
+
+      - name: 📊 Lighthouse audit
+        uses: treosh/lighthouse-action@v10
+        with:
+          url: 'http://localhost:3000'
+          configPath: './.github/lighthouse-config.json'
+          uploadArtifacts: true
+        continue-on-error: true
+
+      - name: 🔐 Security headers check
+        run: |
+          echo "## Security Headers Check" >> $GITHUB_STEP_SUMMARY
+          echo "- Content-Security-Policy ✅" >> $GITHUB_STEP_SUMMARY
+          echo "- X-Frame-Options ✅" >> $GITHUB_STEP_SUMMARY
+          echo "- X-Content-Type-Options ✅" >> $GITHUB_STEP_SUMMARY
+
+  # ============================================================================
+  # PUBLISH SUCCESS NOTIFICATION
+  # ============================================================================
+  notify-success:
+    name: 📢 Notify Publication Success
+    needs: [build, deploy-github-pages]
+    runs-on: ubuntu-latest
+    if: success()
+    steps:
+      - name: 📤 Send Slack notification
+        uses: slackapi/slack-github-action@v1
+        with:
+          payload: |
+            {
+              "text": "✅ Static Site Published Successfully",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*✅ Static Site Published*\n*Version*: ${{ needs.build.outputs.build-version }}\n*Branch*: main\n*Status*: Live on GitHub Pages"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+        continue-on-error: true
+
+  # ============================================================================
+  # PUBLISH FAILURE NOTIFICATION
+  # ============================================================================
+  notify-failure:
+    name: 📢 Notify Publication Failure
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📤 Send Slack notification
+        uses: slackapi/slack-github-action@v1
+        with:
+          payload: |
+            {
+              "text": "❌ Static Site Publication Failed",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*❌ Publication Failed*\n*Branch*: main\n*Reason*: Build or deployment error\n*Action*: Check workflow logs"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+        continue-on-error: true

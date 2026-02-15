@@ -1,0 +1,455 @@
+name: 🤖 AI Content Generation
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # Daily at 6 AM UTC
+  workflow_dispatch:
+    inputs:
+      content_type:
+        description: 'Type of content to generate'
+        required: true
+        default: 'article-summary'
+        type: choice
+        options:
+          - article-summary
+          - seo-metadata
+          - social-snippets
+          - newsletter
+          - blog-post
+      article_topic:
+        description: 'Article topic or keyword'
+        required: false
+        type: string
+
+env:
+  PYTHON_VERSION: "3.11"
+
+jobs:
+  # ============================================================================
+  # GENERATE ARTICLE SUMMARIES WITH AI
+  # ============================================================================
+  generate-summaries:
+    name: 📝 Generate Article Summaries
+    runs-on: ubuntu-latest
+    outputs:
+      generated-count: ${{ steps.generate.outputs.count }}
+    steps:
+      - name: ✅ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install openai pydantic python-dotenv requests
+
+      - name: 🤖 Generate article summaries with GPT-4
+        id: generate
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python - << 'EOF'
+          import os
+          import json
+          from openai import AzureOpenAI
+          from datetime import datetime
+          
+          # Initialize Azure OpenAI client
+          client = AzureOpenAI(
+              api_key=os.getenv('OPENAI_API_KEY'),
+              api_version="2024-02-15-preview",
+              azure_endpoint=os.getenv('AZURE_OPENAI_ENDPOINT', 'https://newsroom.openai.azure.com/')
+          )
+          
+          # Sample articles to generate summaries for
+          articles = [
+              {
+                  "title": "Latest AI Breakthroughs",
+                  "content": "Recent advances in AI technology have shown promising results...",
+                  "url": "https://example.com/ai-breakthroughs"
+              },
+              {
+                  "title": "Cloud Infrastructure Updates",
+                  "content": "Major cloud providers announce new service offerings...",
+                  "url": "https://example.com/cloud-updates"
+              }
+          ]
+          
+          summaries = []
+          
+          for article in articles:
+              try:
+                  response = client.chat.completions.create(
+                      model="gpt-4o",
+                      messages=[
+                          {
+                              "role": "system",
+                              "content": "You are an expert content summarizer. Create concise, engaging summaries that capture key points and SEO-optimize them."
+                          },
+                          {
+                              "role": "user",
+                              "content": f"""
+                              Title: {article['title']}
+                              Content: {article['content']}
+                              
+                              Generate:
+                              1. A 2-3 sentence executive summary
+                              2. 3-5 key takeaways
+                              3. SEO keywords (5 keywords)
+                              4. Call-to-action
+                              
+                              Return as JSON.
+                              """
+                          }
+                      ],
+                      temperature=0.7,
+                      max_tokens=500
+                  )
+                  
+                  summary = {
+                      "article_title": article["title"],
+                      "timestamp": datetime.now().isoformat(),
+                      "generated_content": response.choices[0].message.content,
+                      "url": article["url"]
+                  }
+                  summaries.append(summary)
+                  print(f"✅ Generated summary for: {article['title']}")
+                  
+              except Exception as e:
+                  print(f"❌ Error generating summary for {article['title']}: {str(e)}")
+          
+          # Save to file
+          with open('generated_summaries.json', 'w') as f:
+              json.dump(summaries, f, indent=2)
+          
+          print(f"Generated {len(summaries)} summaries")
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write(f"count={len(summaries)}\n")
+          
+          EOF
+
+      - name: 📤 Upload generated content
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-summaries-${{ github.run_id }}
+          path: generated_summaries.json
+          retention-days: 30
+
+  # ============================================================================
+  # GENERATE SEO METADATA
+  # ============================================================================
+  generate-seo:
+    name: 🔍 Generate SEO Metadata
+    runs-on: ubuntu-latest
+    steps:
+      - name: ✅ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install openai pydantic python-dotenv
+
+      - name: 🤖 Generate SEO metadata
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python - << 'EOF'
+          import os
+          import json
+          from openai import AzureOpenAI
+          
+          client = AzureOpenAI(
+              api_key=os.getenv('OPENAI_API_KEY'),
+              api_version="2024-02-15-preview",
+              azure_endpoint=os.getenv('AZURE_OPENAI_ENDPOINT', 'https://newsroom.openai.azure.com/')
+          )
+          
+          articles = [
+              {"title": "AI Trends in 2026", "description": "Exploring the latest AI innovations..."}
+          ]
+          
+          seo_metadata = []
+          
+          for article in articles:
+              response = client.chat.completions.create(
+                  model="gpt-4o",
+                  messages=[
+                      {
+                          "role": "system",
+                          "content": "You are an SEO expert. Generate comprehensive metadata for web pages."
+                      },
+                      {
+                          "role": "user",
+                          "content": f"""
+                          Article: {article['title']}
+                          Description: {article['description']}
+                          
+                          Generate:
+                          - Meta title (60 chars max)
+                          - Meta description (160 chars max)
+                          - Keywords (comma-separated)
+                          - Open Graph tags
+                          - Twitter card tags
+                          
+                          Return as JSON.
+                          """
+                      }
+                  ],
+                  max_tokens=300
+              )
+              
+              metadata = {
+                  "article": article['title'],
+                  "content": response.choices[0].message.content
+              }
+              seo_metadata.append(metadata)
+          
+          with open('seo_metadata.json', 'w') as f:
+              json.dump(seo_metadata, f, indent=2)
+          
+          print(f"✅ Generated SEO metadata for {len(seo_metadata)} articles")
+          
+          EOF
+
+      - name: 📤 Upload SEO metadata
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-metadata-${{ github.run_id }}
+          path: seo_metadata.json
+          retention-days: 30
+
+  # ============================================================================
+  # GENERATE SOCIAL MEDIA SNIPPETS
+  # ============================================================================
+  generate-social-snippets:
+    name: 📱 Generate Social Media Snippets
+    runs-on: ubuntu-latest
+    steps:
+      - name: ✅ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install openai pydantic python-dotenv
+
+      - name: 🤖 Generate social snippets
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python - << 'EOF'
+          import os
+          import json
+          from openai import AzureOpenAI
+          
+          client = AzureOpenAI(
+              api_key=os.getenv('OPENAI_API_KEY'),
+              api_version="2024-02-15-preview",
+              azure_endpoint=os.getenv('AZURE_OPENAI_ENDPOINT', 'https://newsroom.openai.azure.com/')
+          )
+          
+          articles = [
+              {"title": "Breaking News", "body": "Important announcement..."}
+          ]
+          
+          social_content = []
+          
+          for article in articles:
+              response = client.chat.completions.create(
+                  model="gpt-4o",
+                  messages=[
+                      {
+                          "role": "system",
+                          "content": "You are a social media expert. Create engaging platform-specific content."
+                      },
+                      {
+                          "role": "user",
+                          "content": f"""
+                          Article: {article['title']}
+                          Body: {article['body']}
+                          
+                          Create optimized snippets for:
+                          - Twitter (280 chars with 3 variations)
+                          - LinkedIn (up to 3000 chars for professional audience)
+                          - Facebook (engaging and conversational)
+                          - Instagram caption (with relevant hashtags)
+                          
+                          Return as JSON.
+                          """
+                      }
+                  ],
+                  max_tokens=500
+              )
+              
+              content = {
+                  "article": article['title'],
+                  "platforms": json.loads(response.choices[0].message.content)
+              }
+              social_content.append(content)
+          
+          with open('social_snippets.json', 'w') as f:
+              json.dump(social_content, f, indent=2)
+          
+          print(f"✅ Generated social media snippets for {len(social_content)} articles")
+          
+          EOF
+
+      - name: 📤 Upload social snippets
+        uses: actions/upload-artifact@v4
+        with:
+          name: social-snippets-${{ github.run_id }}
+          path: social_snippets.json
+          retention-days: 30
+
+  # ============================================================================
+  # CREATE NEWSLETTER CONTENT
+  # ============================================================================
+  generate-newsletter:
+    name: 📰 Generate Newsletter Content
+    runs-on: ubuntu-latest
+    steps:
+      - name: ✅ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install openai pydantic python-dotenv
+
+      - name: 🤖 Generate newsletter
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python - << 'EOF'
+          import os
+          import json
+          from datetime import datetime
+          from openai import AzureOpenAI
+          
+          client = AzureOpenAI(
+              api_key=os.getenv('OPENAI_API_KEY'),
+              api_version="2024-02-15-preview",
+              azure_endpoint=os.getenv('AZURE_OPENAI_ENDPOINT', 'https://newsroom.openai.azure.com/')
+          )
+          
+          # Featured articles for this week
+          featured = [
+              {"title": "AI Milestone 2026", "summary": "Breaking through new boundaries..."},
+              {"title": "Market Analysis", "summary": "Q1 trends and insights..."},
+              {"title": "Tech Innovation", "summary": "Next generation tools..."}
+          ]
+          
+          response = client.chat.completions.create(
+              model="gpt-4o",
+              messages=[
+                  {
+                      "role": "system",
+                      "content": "You are an expert newsletter writer. Create engaging, well-structured newsletters."
+                  },
+                  {
+                      "role": "user",
+                      "content": f"""
+                      Create a professional newsletter for this week featuring:
+                      {json.dumps(featured, indent=2)}
+                      
+                      Include:
+                      - Compelling subject line
+                      - Welcome message
+                      - Top stories section with descriptions
+                      - Call-to-action for each story
+                      - Footer with unsubscribe and social links
+                      - Plain text and HTML versions
+                      
+                      Return as JSON with both text and html formats.
+                      """
+                  }
+              ],
+              max_tokens=2000
+          )
+          
+          newsletter = {
+              "subject": "Weekly Newsroom Digest",
+              "week": datetime.now().strftime('%Y-W%V'),
+              "content": response.choices[0].message.content
+          }
+          
+          with open('newsletter.json', 'w') as f:
+              json.dump(newsletter, f, indent=2)
+          
+          print("✅ Generated newsletter content")
+          
+          EOF
+
+      - name: 📤 Upload newsletter
+        uses: actions/upload-artifact@v4
+        with:
+          name: newsletter-${{ github.run_id }}
+          path: newsletter.json
+          retention-days: 30
+
+  # ============================================================================
+  # PUBLISH SUCCESS
+  # ============================================================================
+  publish-summary:
+    name: 📊 Content Generation Summary
+    needs: [generate-summaries, generate-seo, generate-social-snippets, generate-newsletter]
+    runs-on: ubuntu-latest
+    if: success()
+    steps:
+      - name: 📊 Generate report
+        run: |
+          echo "## 🤖 AI Content Generation Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Generated Content" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Article Summaries: ${{ needs.generate-summaries.outputs.generated-count }}" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ SEO Metadata generated" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Social Media Snippets generated" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Newsletter content generated" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Artifacts" >> $GITHUB_STEP_SUMMARY
+          echo "All generated content has been saved as artifacts and is ready for publishing." >> $GITHUB_STEP_SUMMARY
+
+      - name: 📤 Notify on success
+        uses: slackapi/slack-github-action@v1
+        with:
+          payload: |
+            {
+              "text": "✅ AI Content Generation Completed",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*✅ Content Generation Complete*\n*Summaries*: ${{ needs.generate-summaries.outputs.generated-count }}\n*SEO*: Generated\n*Social*: Generated\n*Newsletter*: Generated"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+        continue-on-error: true

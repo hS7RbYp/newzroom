@@ -1,0 +1,424 @@
+name: 🎨 AI Asset & Image Generation
+
+on:
+  workflow_dispatch:
+    inputs:
+      image_type:
+        description: 'Type of image to generate'
+        required: true
+        default: 'hero'
+        type: choice
+        options:
+          - hero
+          - thumbnail
+          - social-card
+          - infographic
+          - banner
+      topic:
+        description: 'Topic for image generation'
+        required: true
+      quantity:
+        description: 'Number of variations'
+        required: false
+        default: '3'
+  schedule:
+    - cron: '0 12 * * 0'  # Weekly on Sunday at noon UTC
+
+env:
+  PYTHON_VERSION: "3.11"
+
+jobs:
+  # ============================================================================
+  # GENERATE HERO IMAGES WITH DALL-E
+  # ============================================================================
+  generate-hero-images:
+    name: 🖼️ Generate Hero Images
+    runs-on: ubuntu-latest
+    outputs:
+      image-count: ${{ steps.generate.outputs.count }}
+    steps:
+      - name: ✅ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install openai pillow aiohttp python-dotenv requests
+
+      - name: 🎨 Generate hero images with DALL-E
+        id: generate
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python - << 'EOF'
+          import os
+          import json
+          from openai import AzureOpenAI
+          from datetime import datetime
+          import base64
+          import requests
+          
+          client = AzureOpenAI(
+              api_key=os.getenv('OPENAI_API_KEY'),
+              api_version="2024-02-15-preview",
+              azure_endpoint=os.getenv('AZURE_OPENAI_ENDPOINT', 'https://newsroom.openai.azure.com/')
+          )
+          
+          # Image generation prompts
+          prompts = [
+              "Professional newsroom dashboard, modern UI, AI-powered analytics, digital newspaper concept, 4k, professional photography",
+              "Future of journalism, AI agents working together, digital transformation, vibrant colors, futuristic style",
+              "Content creation workflow, automated publishing, AI assistance, modern office, clean design"
+          ]
+          
+          generated_images = []
+          image_dir = "dashboard/public/generated-images"
+          os.makedirs(image_dir, exist_ok=True)
+          
+          for idx, prompt in enumerate(prompts, 1):
+              try:
+                  print(f"Generating image {idx}/{len(prompts)}...")
+                  
+                  response = client.images.generate(
+                      model="dall-e-3",
+                      prompt=prompt,
+                      n=1,
+                      size="1024x1024",
+                      quality="hd",
+                      style="natural"
+                  )
+                  
+                  image_url = response.data[0].url
+                  
+                  # Download and save image
+                  img_response = requests.get(image_url)
+                  if img_response.status_code == 200:
+                      filename = f"hero-{idx}-{datetime.now().strftime('%Y%m%d')}.png"
+                      filepath = os.path.join(image_dir, filename)
+                      with open(filepath, 'wb') as f:
+                          f.write(img_response.content)
+                      
+                      generated_images.append({
+                          "filename": filename,
+                          "path": f"public/generated-images/{filename}",
+                          "prompt": prompt,
+                          "size": "1024x1024",
+                          "model": "dall-e-3",
+                          "generated_at": datetime.now().isoformat()
+                      })
+                      
+                      print(f"✅ Saved: {filename}")
+                  
+              except Exception as e:
+                  print(f"❌ Error generating image {idx}: {str(e)}")
+          
+          # Save metadata
+          metadata = {
+              "type": "hero_images",
+              "count": len(generated_images),
+              "images": generated_images,
+              "generated_at": datetime.now().isoformat()
+          }
+          
+          with open('image_metadata.json', 'w') as f:
+              json.dump(metadata, f, indent=2)
+          
+          print(f"\n✅ Generated {len(generated_images)} hero images")
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write(f"count={len(generated_images)}\n")
+          
+          EOF
+
+      - name: 📤 Upload generated images
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-hero-images-${{ github.run_id }}
+          path: |
+            dashboard/public/generated-images/
+            image_metadata.json
+          retention-days: 90
+
+  # ============================================================================
+  # GENERATE SOCIAL CARD IMAGES
+  # ============================================================================
+  generate-social-cards:
+    name: 📱 Generate Social Card Images
+    runs-on: ubuntu-latest
+    steps:
+      - name: ✅ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pillow python-dotenv requests
+
+      - name: 🎨 Generate social card templates
+        run: |
+          python - << 'EOF'
+          from PIL import Image, ImageDraw, ImageFont
+          import os
+          import json
+          from datetime import datetime
+          
+          # Create output directory
+          os.makedirs("dashboard/public/social-cards", exist_ok=True)
+          
+          # Define social card templates
+          templates = [
+              {
+                  "name": "Twitter Card",
+                  "width": 1024,
+                  "height": 512,
+                  "bg_color": "#1DA1F2",
+                  "text_color": "#FFFFFF"
+              },
+              {
+                  "name": "LinkedIn Card",
+                  "width": 1200,
+                  "height": 627,
+                  "bg_color": "#0A66C2",
+                  "text_color": "#FFFFFF"
+              },
+              {
+                  "name": "Facebook Card",
+                  "width": 1200,
+                  "height": 630,
+                  "bg_color": "#1877F2",
+                  "text_color": "#FFFFFF"
+              },
+              {
+                  "name": "Instagram Square",
+                  "width": 1080,
+                  "height": 1080,
+                  "bg_color": "#E1306C",
+                  "text_color": "#FFFFFF"
+              }
+          ]
+          
+          generated = []
+          
+          for template in templates:
+              try:
+                  # Create image
+                  img = Image.new('RGB', (template['width'], template['height']), template['bg_color'])
+                  draw = ImageDraw.Draw(img)
+                  
+                  # Add text
+                  text = f"{template['name']}\nOptimized for Publishing"
+                  text_bbox = draw.textbbox((0, 0), text)
+                  text_width = text_bbox[2] - text_bbox[0]
+                  text_height = text_bbox[3] - text_bbox[1]
+                  
+                  x = (template['width'] - text_width) // 2
+                  y = (template['height'] - text_height) // 2
+                  
+                  draw.text((x, y), text, fill=template['text_color'], align='center')
+                  
+                  # Save
+                  filename = f"social-card-{template['name'].replace(' ', '-').lower()}.png"
+                  filepath = os.path.join("dashboard/public/social-cards", filename)
+                  img.save(filepath)
+                  
+                  generated.append({
+                      "name": template['name'],
+                      "filename": filename,
+                      "path": f"public/social-cards/{filename}",
+                      "dimensions": f"{template['width']}x{template['height']}",
+                      "platform": template['name'].split()[0].lower()
+                  })
+                  
+                  print(f"✅ Generated: {template['name']}")
+                  
+              except Exception as e:
+                  print(f"❌ Error generating {template['name']}: {str(e)}")
+          
+          # Save manifest
+          manifest = {
+              "type": "social_cards",
+              "count": len(generated),
+              "cards": generated,
+              "generated_at": datetime.now().isoformat()
+          }
+          
+          with open('social_cards_manifest.json', 'w') as f:
+              json.dump(manifest, f, indent=2)
+          
+          print(f"\n✅ Generated {len(generated)} social card templates")
+          
+          EOF
+
+      - name: 📤 Upload social cards
+        uses: actions/upload-artifact@v4
+        with:
+          name: social-cards-${{ github.run_id }}
+          path: |
+            dashboard/public/social-cards/
+            social_cards_manifest.json
+          retention-days: 90
+
+  # ============================================================================
+  # GENERATE THUMBNAILS
+  # ============================================================================
+  generate-thumbnails:
+    name: 🖻️ Generate Article Thumbnails
+    runs-on: ubuntu-latest
+    steps:
+      - name: ✅ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pillow python-dotenv
+
+      - name: 🎨 Generate thumbnail templates
+        run: |
+          python - << 'EOF'
+          from PIL import Image, ImageDraw
+          import os
+          import json
+          from datetime import datetime
+          
+          os.makedirs("dashboard/public/thumbnails", exist_ok=True)
+          
+          # Thumbnail sizes
+          sizes = [
+              {"name": "Standard", "width": 620, "height": 360},
+              {"name": "Mobile", "width": 480, "height": 280},
+              {"name": "Compact", "width": 300, "height": 200}
+          ]
+          
+          generated = []
+          
+          for size in sizes:
+              try:
+                  img = Image.new('RGB', (size['width'], size['height']), '#2C3E50')
+                  draw = ImageDraw.Draw(img)
+                  
+                  text = f"{size['name']} Thumbnail\n{size['width']}x{size['height']}"
+                  draw.text((10, 10), text, fill='#FFFFFF')
+                  
+                  filename = f"thumbnail-{size['name'].lower()}.png"
+                  filepath = os.path.join("dashboard/public/thumbnails", filename)
+                  img.save(filepath)
+                  
+                  generated.append({
+                      "name": size['name'],
+                      "filename": filename,
+                      "dimensions": f"{size['width']}x{size['height']}",
+                      "aspect_ratio": f"{size['width']/size['height']:.2f}:1"
+                  })
+                  
+                  print(f"✅ Generated thumbnail: {size['name']}")
+                  
+              except Exception as e:
+                  print(f"❌ Error: {str(e)}")
+          
+          manifest = {
+              "type": "thumbnails",
+              "count": len(generated),
+              "thumbnails": generated,
+              "generated_at": datetime.now().isoformat()
+          }
+          
+          with open('thumbnails_manifest.json', 'w') as f:
+              json.dump(manifest, f, indent=2)
+          
+          print(f"\n✅ Generated {len(generated)} thumbnail templates")
+          
+          EOF
+
+      - name: 📤 Upload thumbnails
+        uses: actions/upload-artifact@v4
+        with:
+          name: thumbnails-${{ github.run_id }}
+          path: |
+            dashboard/public/thumbnails/
+            thumbnails_manifest.json
+          retention-days: 90
+
+  # ============================================================================
+  # ASSET OPTIMIZATION
+  # ============================================================================
+  optimize-assets:
+    name: ⚡ Optimize Generated Assets
+    needs: [generate-hero-images, generate-social-cards, generate-thumbnails]
+    runs-on: ubuntu-latest
+    steps:
+      - name: ✅ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 📦 Install optimization tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y imagemagick
+
+      - name: 🔄 Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: ⚡ Optimize images
+        run: |
+          find artifacts -name "*.png" -type f -exec convert {} -quality 85 -strip {} \;
+          find artifacts -name "*.jpg" -type f -exec jpegoptim --all-progressive --max=85 {} \;
+          echo "✅ Image optimization complete"
+
+      - name: 📊 Generate optimization report
+        run: |
+          echo "## Image Optimization Report" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Hero images optimized" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Social cards optimized" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Thumbnails optimized" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Asset Summary" >> $GITHUB_STEP_SUMMARY
+          find artifacts -name "*" -type f | wc -l | xargs echo "Total files generated:"
+
+  # ============================================================================
+  # NOTIFICATION
+  # ============================================================================
+  notify-completion:
+    name: 📢 Notify Asset Generation
+    needs: [generate-hero-images, generate-social-cards, generate-thumbnails, optimize-assets]
+    runs-on: ubuntu-latest
+    if: success()
+    steps:
+      - name: ✨ Send success notification
+        uses: slackapi/slack-github-action@v1
+        with:
+          payload: |
+            {
+              "text": "✅ AI Asset Generation Completed",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*✅ Asset Generation Complete*\n*Hero Images*: ${{ needs.generate-hero-images.outputs.image-count }}\n*Social Cards*: Generated\n*Thumbnails*: Generated\n*Optimization*: Complete"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+        continue-on-error: true

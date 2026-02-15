@@ -1,0 +1,51 @@
+{
+  "extends": "lighthouse:default",
+  "settings": {
+    "maxWaitForLoad": 45000,
+    "throttling": {
+      "rttMs": 40,
+      "throughputKbps": 11024,
+      "cpuSlowdownMultiplier": 1
+    }
+  },
+  "audits": {
+    "metrics": {
+      "options": {
+        "thresholds": {
+          "first-contentful-paint": 1800,
+          "speed-index": 3400,
+          "largest-contentful-paint": 2500,
+          "cumulative-layout-shift": 0.1,
+          "time-to-interactive": 3800
+        }
+      }
+    }
+  },
+  "categories": {
+    "performance": {
+      "title": "Performance",
+      "description": "These metrics validate the performance of your application.",
+      "auditRefs": [
+        { "id": "first-contentful-paint", "weight": 10 },
+        { "id": "largest-contentful-paint", "weight": 25 },
+        { "id": "cumulative-layout-shift", "weight": 25 },
+        { "id": "speed-index", "weight": 10 }
+      ]
+    },
+    "accessibility": {
+      "title": "Accessibility",
+      "description": "These checks validate the accessibility of your web application.",
+      "weight": 0
+    },
+    "best-practices": {
+      "title": "Best Practices",
+      "description": "We've included the most important best practices for modern web development.",
+      "weight": 0
+    },
+    "seo": {
+      "title": "SEO",
+      "description": "These checks ensure your page is optimized for search engines.",
+      "weight": 0
+    }
+  }
+}
