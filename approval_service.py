@@ -14,7 +14,7 @@ import sys
 # Add agents to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "agents"))
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 from approval import get_approval_queue, ApprovalStatus
 from orchestrator import ArticleOrchestrator
 from config import get_config
@@ -71,7 +71,8 @@ def get_queue():
         queue_items = loop.run_until_complete(approval_queue.get_queue(status))
         loop.close()
         
-        return jsonify(queue_items), 200
+        # Return list as JSON array
+        return Response(json.dumps(queue_items), mimetype='application/json'), 200
     except Exception as e:
         logger.error(f"Error getting queue: {str(e)}")
         return jsonify({"status": "error", "message": str(e)}), 500
