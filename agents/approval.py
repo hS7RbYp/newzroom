@@ -48,8 +48,8 @@ class ApprovalQueue:
     
     def __init__(self):
         config = get_config()
-        self.cosmos_endpoint = config.get("COSMOS_ENDPOINT")
-        self.cosmos_key = config.get("COSMOS_KEY")
+        self.cosmos_endpoint = config.cosmos_db.endpoint
+        self.cosmos_key = config.cosmos_db.key
         self.client = CosmosClient(self.cosmos_endpoint, self.cosmos_key)
         self.database = self.client.get_database_client("articles")
         

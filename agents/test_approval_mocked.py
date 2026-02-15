@@ -208,21 +208,21 @@ async def test_confidence_calculation():
     
     # Test high quality
     score = queue.calculate_confidence_score(HIGH_QUALITY_ARTICLE)
-    print(f"✓ HIGH_QUALITY_ARTICLE score: {score}/10")
+    print(f"[PASS] HIGH_QUALITY_ARTICLE score: {score}/10")
     assert score > 8.5, f"Expected GREEN tier (>8.5), got {score}"
-    print("✓ Expected: GREEN (> 8.5) - PASS")
+    print("[PASS] Expected: GREEN (> 8.5) - PASS")
     
     # Test medium quality
     score = queue.calculate_confidence_score(MEDIUM_QUALITY_ARTICLE)
-    print(f"✓ MEDIUM_QUALITY_ARTICLE score: {score}/10")
+    print(f"[PASS] MEDIUM_QUALITY_ARTICLE score: {score}/10")
     assert 6.5 <= score <= 8.5, f"Expected YELLOW tier (6.5-8.5), got {score}"
-    print("✓ Expected: YELLOW (6.5-8.5) - PASS")
+    print("[PASS] Expected: YELLOW (6.5-8.5) - PASS")
     
     # Test low quality
     score = queue.calculate_confidence_score(LOW_QUALITY_ARTICLE)
-    print(f"✓ LOW_QUALITY_ARTICLE score: {score}/10")
+    print(f"[PASS] LOW_QUALITY_ARTICLE score: {score}/10")
     assert score < 6.5, f"Expected RED tier (<6.5), got {score}"
-    print("✓ Expected: RED (< 6.5) - PASS")
+    print("[PASS] Expected: RED (< 6.5) - PASS")
 
 
 async def test_smart_routing_green():
@@ -442,7 +442,7 @@ async def test_confidence_thresholds():
         print(f"  {status}: Score {score} -> {actual.name} (expected {expected.name})")
         assert actual == expected, f"Score {score}: expected {expected.name}, got {actual.name}"
     
-    print("✓ Test PASSED - All threshold boundaries correct")
+    print("[OK] Test PASSED - All threshold boundaries correct")
 
 
 # ============================================================================
