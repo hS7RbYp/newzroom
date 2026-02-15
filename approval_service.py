@@ -123,7 +123,7 @@ def submit_article():
             "status": "submitted",
             "article_id": article_id,
             "message": "Article processed through pipeline",
-            "routing": result.get("final_status", "unknown")
+            "routing": result.get("status", "unknown")
         }), 200
     
     except Exception as e:

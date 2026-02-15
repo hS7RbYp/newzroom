@@ -269,20 +269,29 @@ class ApprovalQueue:
     async def get_approval_stats(self) -> Dict[str, Any]:
         """Get approval queue statistics"""
         try:
-            query = """
-            SELECT c.status, COUNT(1) as count 
-            FROM c 
-            GROUP BY c.status
-            """
-            stats = {}
-            for item in self.approval_container.query_items(query=query):
-                stats[item["status"]] = item["count"]
+            query = "SELECT * FROM c"
+            items = list(self.approval_container.query_items(
+                query=query,
+                enable_cross_partition_query=True
+            ))
+            
+            # Count items by status
+            stats = {
+                ApprovalStatus.PENDING_REVIEW: 0,
+                ApprovalStatus.APPROVED: 0,
+                ApprovalStatus.REJECTED: 0
+            }
+            
+            for item in items:
+                status = item.get("status")
+                if status in stats:
+                    stats[status] += 1
             
             return {
-                "pending": stats.get(ApprovalStatus.PENDING_REVIEW, 0),
-                "approved": stats.get(ApprovalStatus.APPROVED, 0),
-                "rejected": stats.get(ApprovalStatus.REJECTED, 0),
-                "total": sum(stats.values())
+                "pending": stats[ApprovalStatus.PENDING_REVIEW],
+                "approved": stats[ApprovalStatus.APPROVED],
+                "rejected": stats[ApprovalStatus.REJECTED],
+                "total": len(items)
             }
         except Exception as e:
             logger.error(f"Failed to get stats: {str(e)}")
