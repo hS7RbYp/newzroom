@@ -1,0 +1,94 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "azure-autonomous-newsroom"
+version = "0.1.0"
+description = "Multi-agent newsroom system powered by Azure Foundry and OpenAI"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+authors = [
+    {name = "Azure Autonomous Newsroom Team", email = "newsroom@example.com"}
+]
+
+dependencies = [
+    # Azure SDK
+    "azure-identity>=1.14.0",
+    "azure-keyvault-secrets>=4.7.0",
+    "azure-cosmos>=4.4.0",
+    "azure-search-documents>=11.4.0",
+    "azure-servicebus>=7.11.0",
+    "azure-monitor-opentelemetry>=1.1.0",
+    
+    # Foundry Agent Service
+    "azure-ai-foundry>=0.2.0",
+    
+    # LLM & Embeddings
+    "openai>=1.12.0",
+    "python-dotenv>=1.0.0",
+    
+    # Data & ML
+    "numpy>=1.24.0",
+    "pandas>=2.0.0",
+    "pydantic>=2.0.0",
+    
+    # Async & Concurrent
+    "aiohttp>=3.9.0",
+    "asyncio-contextmanager>=1.0.0",
+    
+    # Logging & Monitoring
+    "python-json-logger>=2.0.0",
+    "opentelemetry-api>=1.20.0",
+    "opentelemetry-sdk>=1.20.0",
+    "opentelemetry-exporter-azure-monitor>=1.0.0",
+    
+    # Utilities
+    "python-dateutil>=2.8.0",
+    "requests>=2.31.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.9.0",
+    "pylint>=2.17.0",
+    "mypy>=1.5.0",
+    "isort>=5.12.0",
+    "flake8>=6.1.0",
+    "pre-commit>=3.4.0",
+]
+
+test = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "pytest-mock>=3.11.0",
+    "responses>=0.13.0",
+]
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+testpaths = ["agents/tests"]
+asyncio_mode = "auto"
+addopts = "-v --cov=agents --cov-report=xml"
+
+[tool.pylint]
+max-line-length = 100
+disable = ["C0111", "C0103"]

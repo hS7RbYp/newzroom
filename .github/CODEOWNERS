@@ -1,0 +1,25 @@
+# CODEOWNERS
+
+# Default owners for everything
+* @team-newsroom-leads
+
+# Python agents - Scout/Prof/Scribe/Judge team
+/agents/scout.py @team-scout
+/agents/prof.py @team-prof
+/agents/scribe.py @team-scribe
+/agents/judge.py @team-judge
+/agents/tests/ @team-qa
+
+# Infrastructure & IaC
+/infrastructure/ @team-infrastructure
+/infrastructure/terraform/ @team-infrastructure
+/.github/workflows/ @team-devops
+
+# Documentation
+/docs/ @team-documentation
+README.md @team-leads
+CONTRIBUTING.md @team-leads
+
+# Configuration
+pyproject.toml @team-leads
+requirements.txt @team-leads
