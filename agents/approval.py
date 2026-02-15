@@ -207,7 +207,8 @@ class ApprovalQueue:
             query = "SELECT * FROM c WHERE c.article_id = @article_id"
             items = list(self.approval_container.query_items(
                 query=query,
-                parameters=[{"name": "@article_id", "value": article_id}]
+                parameters=[{"name": "@article_id", "value": article_id}],
+                enable_cross_partition_query=True
             ))
             
             if not items:

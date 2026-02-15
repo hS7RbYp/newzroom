@@ -53,10 +53,22 @@ def health_check():
 def get_queue():
     """Get pending articles in approval queue"""
     try:
+        # Get optional status parameter
+        status = request.args.get("status")
+        if status:
+            # Convert to enum value if provided
+            status_map = {
+                "pending": "PENDING_REVIEW",
+                "pending_review": "PENDING_REVIEW",
+                "approved": "APPROVED",
+                "rejected": "REJECTED"
+            }
+            status = status_map.get(status.lower(), status.upper())
+        
         # Run async function in event loop
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-        queue_items = loop.run_until_complete(approval_queue.get_queue())
+        queue_items = loop.run_until_complete(approval_queue.get_queue(status))
         loop.close()
         
         return jsonify({
