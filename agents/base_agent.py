@@ -25,6 +25,9 @@ from pydantic import BaseModel, Field
 from opentelemetry import trace, metrics
 from opentelemetry.trace import Tracer
 from opentelemetry.metrics import Meter
+from openai import AzureOpenAI
+
+from config import get_config
 
 
 class AgentStatus(str, Enum):
@@ -92,6 +95,9 @@ class BaseAgent(ABC):
 
         # Circuit breaker state
         self.circuit_open = False
+        
+        # Initialize Azure OpenAI client
+        self.openai_client = self._get_openai_client()
 
         self.logger.info(
             f"Initialized agent",
@@ -116,6 +122,54 @@ class BaseAgent(ABC):
         logger.addHandler(handler)
 
         return logger
+    
+    def _get_openai_client(self) -> AzureOpenAI:
+        """Initialize Azure OpenAI client"""
+        app_config = get_config()
+        return AzureOpenAI(
+            api_key=app_config.openai.api_key,
+            api_version=app_config.openai.api_version,
+            azure_endpoint=app_config.openai.endpoint
+        )
+    
+    async def _call_openai(
+        self,
+        model_deployment: str,
+        system_prompt: str,
+        user_message: str,
+        temperature: float = 0.7,
+        max_tokens: int = 1000
+    ) -> str:
+        """Call Azure OpenAI API (GPT-4o or GPT-4o-mini)
+        
+        Args:
+            model_deployment: Deployment name (gpt-4o, gpt-4o-mini)
+            system_prompt: System instruction for the model
+            user_message: User message/content to process
+            temperature: Sampling temperature (0-2)
+            max_tokens: Maximum response tokens
+            
+        Returns:
+            Model response as string
+        """
+        try:
+            response = await asyncio.to_thread(
+                self.openai_client.chat.completions.create,
+                model=model_deployment,
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_message}
+                ],
+                temperature=temperature,
+                max_tokens=max_tokens
+            )
+            return response.choices[0].message.content
+        except Exception as e:
+            self.logger.error(
+                f"OpenAI API call failed: {str(e)}",
+                extra={"model": model_deployment, "agent_id": self.agent_id}
+            )
+            raise
 
     async def execute(
         self,

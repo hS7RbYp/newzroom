@@ -9,8 +9,12 @@ Configuration values for agents:
 """
 
 import os
+from dotenv import load_dotenv
 from pydantic import BaseModel
 from typing import Optional
+
+# Load environment variables from .env file
+load_dotenv()
 
 
 class AgentConfig(BaseModel):
@@ -42,9 +46,9 @@ class CosmosDbConfig(BaseModel):
 
 
 class SearchConfig(BaseModel):
-    """Azure AI Search configuration"""
-    endpoint: str
-    key: str
+    """Azure AI Search configuration (optional - using Cosmos vector search)"""
+    endpoint: Optional[str] = None
+    key: Optional[str] = None
     index_name: str = "brand-rules"
 
 
@@ -56,9 +60,9 @@ class ServiceBusConfig(BaseModel):
 
 
 class FoundryConfig(BaseModel):
-    """Azure Foundry Agent Service configuration"""
-    project_connection_string: str
-    agent_configs: dict
+    """Azure Foundry Agent Service configuration (optional)"""
+    project_connection_string: Optional[str] = None
+    agent_configs: dict = {}
 
 
 class AppConfig(BaseModel):
@@ -94,8 +98,7 @@ def load_config_from_env() -> AppConfig:
     )
     
     foundry_config = FoundryConfig(
-        project_connection_string=os.getenv("FOUNDRY_PROJECT_CONNECTION_STRING"),
-        agent_configs={}
+        project_connection_string=os.getenv("FOUNDRY_PROJECT_CONNECTION_STRING")
     )
     
     agent_configs = {

@@ -51,19 +51,57 @@ class JudgeAgent(BaseAgent):
             }
         """
         article_id = input_data.get("article_id", "")
+        title = input_data.get("title", "")
+        content = input_data.get("content", "")
+        published_at = input_data.get("published_at", "")
         
         try:
-            # TODO: Call Azure OpenAI GPT-4o-mini for quality evaluation
-            # evaluation = await self._call_openai(article_id)
-            quality_score = 8.5  # Placeholder
-            brand_compliant = True
-            user_sentiment = "positive"
-            feedback_patterns = []
+            # Evaluate article quality and compliance using GPT-4o-mini
+            system_prompt = """You are a quality assurance editor reviewing published articles.
+Evaluate articles based on:
+- Grammar & Spelling: Is writing error-free?
+- Brand Voice: Does it match our style guide?
+- Accuracy: Are facts verifiable?
+- Tone Alignment: Is tone appropriate for our brand?
+- Engagement: Is it compelling and readable?
 
-            recommendation = "APPROVED" if quality_score > 7.5 else "NEEDS_REVISION"
+Respond with ONLY JSON: {
+  "quality_score": <1-10>,
+  "brand_compliant": <true/false>,
+  "issues": [<list of issues>],
+  "recommendation": "<APPROVED|NEEDS_REVISION|REJECT>"
+}"""
 
-            # TODO: If rejections detected in patterns → trigger vector rule update
-            # This triggers weekly clustering in MEMORY_ARCHITECTURE
+            user_message = f"""Article ID: {article_id}
+Title: {title}
+Published: {published_at}
+
+Content:
+{content[:2000]}...
+
+Review this article for quality and brand compliance."""
+
+            response = await self._call_openai(
+                model_deployment="gpt-4o-mini",
+                system_prompt=system_prompt,
+                user_message=user_message,
+                temperature=0.4,
+                max_tokens=300
+            )
+            
+            # Parse response
+            import json as json_lib
+            try:
+                result_json = json_lib.loads(response)
+                quality_score = float(result_json.get("quality_score", 5.0))
+                brand_compliant = bool(result_json.get("brand_compliant", False))
+                feedback_patterns = result_json.get("issues", [])
+                recommendation = result_json.get("recommendation", "NEEDS_REVISION")
+            except:
+                quality_score = 5.0
+                brand_compliant = False
+                feedback_patterns = ["Unable to parse evaluation"]
+                recommendation = "NEEDS_REVISION"
 
             return {
                 "agent": "judge",
@@ -71,7 +109,6 @@ class JudgeAgent(BaseAgent):
                 "article_id": article_id,
                 "quality_score": quality_score,
                 "brand_compliance": brand_compliant,
-                "user_sentiment": user_sentiment,
                 "recommendation": recommendation,
                 "feedback_patterns": feedback_patterns,
                 "next_agent": None  # Judge is end of pipeline
