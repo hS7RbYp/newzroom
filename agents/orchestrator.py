@@ -23,6 +23,7 @@ from scribe import ScribeAgent
 from judge import JudgeAgent
 from pixel import PixelAgent
 from ops import OpsAgent
+from approval import get_approval_queue, ConfidenceLevel
 from config import get_config
 
 
@@ -98,7 +99,8 @@ class ArticleOrchestrator:
             "pixel": PixelAgent(agent_id="pixel"),
             "ops": OpsAgent(agent_id="ops")
         }
-        logger.info("Orchestrator initialized with 6 agents")
+        self.approval_queue = get_approval_queue()
+        logger.info("Orchestrator initialized with 6 agents + approval system")
     
     async def process_article(
         self,
@@ -187,7 +189,26 @@ class ArticleOrchestrator:
             if pixel_result:
                 pipeline_data.update(pixel_result)
             
-            # Stage 6: Ops - Publishing
+            # Stage 5.5: Smart Routing - Approval queue decision
+            logger.info("Stage 5.5: Smart Routing (confidence-based approval)")
+            metrics.record_agent_start("smart_router")
+            routing_result = await self.approval_queue.route_article(article_id, pipeline_data)
+            pipeline_data.update(routing_result)
+            metrics.record_agent_end("smart_router", routing_result)
+            
+            if routing_result["action"] == "AUTO_PUBLISH":
+                logger.info(f"Article {article_id} auto-published (high confidence)")
+                metrics.final_status = "AUTO_PUBLISHED"
+            elif routing_result["action"] == "QUEUE_FOR_REVIEW":
+                logger.info(f"Article {article_id} queued for human review (medium confidence)")
+                metrics.final_status = "PENDING_REVIEW"
+                return self._build_final_response(metrics, pipeline_data)
+            elif routing_result["action"] == "REJECT":
+                logger.info(f"Article {article_id} rejected (low confidence)")
+                metrics.final_status = "REJECTED"
+                return self._build_final_response(metrics, pipeline_data)
+            
+            # Stage 6: Ops - Publishing (only for AUTO_PUBLISHED articles)
             logger.info("Stage 6: Ops (publication & metrics)")
             metrics.record_agent_start("ops")
             ops_result = await self._run_agent("ops", pipeline_data, context, metrics)
